@@ -71,7 +71,3 @@ class CtrlUsuario:
             else:
                 self.__tela.tela_login()
                 return
-
-# oi = CtrlUsuario()
-# oi.cadastrar_admin('Matheus',97,'1','1',1,'1')
-# print(oi.contas)
