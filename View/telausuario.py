@@ -5,14 +5,15 @@ class TelaUsuario:
         pass
 
     def tela_contas(self, contas: list):
+        print('Contas Cadastradas (Nome: CPF)')
+        print('//',end='')
         for index, value in enumerate(contas):
-            print('Contas Cadastradas')
-            print(f'{index+1} - {value.nome}:{value.cpf}', end=' ')
-            print()
+            print(f'{value["nome"]}:{value["cpf"]}', end='//')
+        print()
 
     def tela_escolher_conta(self, contas: list) -> str:
         self.tela_contas(contas)
-        conta_selecionada = input("Selecione a conta que deseja: ")
+        conta_selecionada = input("Selecione a conta que deseja pelo CPF: ")
         return conta_selecionada
 
     def tela_alterar_conta(self):
