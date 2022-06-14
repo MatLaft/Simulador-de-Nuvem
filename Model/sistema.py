@@ -48,7 +48,3 @@ class Sistema:
                 self.menu_inical()
             else:
                 switcher[opcao](self.usuario_ativo)
-
-
-oi = Sistema()
-oi.menu()
