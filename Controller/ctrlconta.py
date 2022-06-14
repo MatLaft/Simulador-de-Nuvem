@@ -1,5 +1,5 @@
 from Model.usuario import *
-from View.telausuario import *
+from View.telaconta import *
 from Model.admin import *
 
 
@@ -72,3 +72,4 @@ class CtrlConta:
             else:
                 self.__tela.tela_login()
                 return
+

@@ -77,6 +77,10 @@ class TelaUsuario:
         if opt == 1:
             cpf = input('CPF: ')
             senha = input('Senha: ')
+            try:
+                cpf = int(cpf)
+            except ValueError:
+                print('Digite um CPF Válido')
             return cpf, senha
         else:
             print('CPF e/ou Senha incorreto(s)!')
