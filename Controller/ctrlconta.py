@@ -21,13 +21,17 @@ class CtrlConta:
     def contas(self):
         return list(self.__contas.values())
 
-    def cadastrar_usuario(self, nome: str, cpf: int, email: str, senha: str, diretorio, empresa: str):
+    def cadastrar_usuario(self):
+        diretorio = 'DIRETORIO'
+        nome, cpf, empresa, email, senha = self.__tela.tela_cadastro(self.__contas.keys())
         if isinstance(nome, str) and isinstance(cpf, int) and isinstance(email, str) and isinstance(senha, str) \
                 and isinstance(empresa, str) and cpf not in self.__contas.keys():
             usuario = Usuario(nome, cpf, email, senha, diretorio, empresa)
             self.__contas[usuario.cpf] = usuario
 
-    def cadastrar_admin(self, nome: str, cpf: int, email: str, senha: str, diretorio, empresa: str):
+    def cadastrar_admin(self):
+        diretorio = 'DIRETORIO'
+        nome, cpf, empresa, email, senha = self.__tela.tela_cadastro()
         if isinstance(nome, str) and isinstance(cpf, int) and isinstance(email, str) and isinstance(senha, str) \
                 and isinstance(empresa, str) and cpf not in self.__contas.keys():
             admin = Admin(nome, cpf, email, senha, diretorio, empresa)
@@ -35,9 +39,7 @@ class CtrlConta:
 
     def remover_usuario(self, cpf):
         if cpf in self.__contas.keys():
-            for i in self.__contas:
-                if i.cpf == cpf:
-                    del self.__contas[i]
+            del self.__contas[cpf]
 
     def selecionar_usuario(self):
         conta_selecionada = self.__tela.tela_escolher_conta(self.relacao_cpf_nome())
@@ -52,8 +54,8 @@ class CtrlConta:
                 print(f'CPF nao cadastrado!')
                 conta_selecionada = self.__tela.tela_escolher_conta(self.relacao_cpf_nome())
 
-    def alterar_conta(self):
-        conta_selecionada = self.selecionar_usuario()
+    def alterar_conta(self,usuario):
+        conta_selecionada = usuario
         opcao = self.__tela.tela_alterar_conta()
         if opcao == 1:
             conta_selecionada.nome = self.__tela.alterar_nome()
@@ -67,9 +69,13 @@ class CtrlConta:
     def logar(self):
         cpf, senha = self.__tela.tela_login(1)
         for i in self.__contas.values():
-            if i.cpf == cpf and senha:
+            if i.cpf == cpf and i.senha == senha:
                 return i
-            else:
-                self.__tela.tela_login()
-                return
+        else:
+            self.__tela.tela_login()
+            return
 
+    def ver_dados(self, usuario):
+        nome, cpf, email, empresa= usuario.nome, usuario.cpf, usuario.email, usuario.empresa
+        self.__tela.tela_ver_dados(nome, cpf, email, empresa)
+        self.alterar_conta(usuario)

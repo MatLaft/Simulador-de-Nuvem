@@ -6,7 +6,7 @@ class TelaUsuario:
 
     def tela_contas(self, contas: list):
         print('Contas Cadastradas (Nome: CPF)')
-        print('//',end='')
+        print('//', end='')
         for index, value in enumerate(contas):
             print(f'{value["nome"]}:{value["cpf"]}', end='//')
         print()
@@ -17,25 +17,33 @@ class TelaUsuario:
         return conta_selecionada
 
     def tela_alterar_conta(self):
-        print('Selecione o que deseja alterar:')
-        opcoes = ('1 - nome   2 - email   3 - senha  0 - retornar')
-        print(opcoes)
-        op = input('Opcao: ')
-        while type(op) == str:
-            try:
-                if 0 <= int(op) <= 3:
-                    op = int(op)
-                else:
-                    raise IndexError
-            except ValueError:
-                print('ERRO!!Digite um numero!!')
-                print(opcoes)
-                op = input('Opcao: ')
-            except IndexError:
-                print(opcoes)
-                print('ERRO!!Numero digitado deve estar entre 1 a 3!!')
-                print(opcoes)
-                op = input('Opcao: ')
+        print('Deseja alterar algum dado?')
+        escolha = input('S para sim, N para nao: ').lower()
+        if escolha == 'n':
+            return
+        elif escolha == 's':
+            print('Selecione o que deseja alterar!')
+            opcoes = '1 - nome   2 - email   3 - senha  0 - retornar'
+            print(opcoes)
+            op = input('Opcao: ')
+            while type(op) == str:
+                try:
+                    if 0 <= int(op) <= 3:
+                        op = int(op)
+                        return op
+                    else:
+                        raise IndexError
+                except ValueError:
+                    print('ERRO!!Digite um numero!!')
+                    print(opcoes)
+                    op = input('Opcao: ')
+                except IndexError:
+                    print(opcoes)
+                    print('ERRO!!Numero digitado deve estar entre 1 a 3!!')
+                    print(opcoes)
+                    op = input('Opcao: ')
+        else:
+            print('Escolha invalida')
 
     def alterar_senha(self):
         primeira = input('Digite uma nova senha: ')
@@ -73,7 +81,7 @@ class TelaUsuario:
                 segunda = input('Digite o email novamente: ')
         return primeira
 
-    def tela_login(self,opt = None):
+    def tela_login(self, opt=None):
         if opt == 1:
             cpf = input('CPF: ')
             senha = input('Senha: ')
@@ -84,3 +92,29 @@ class TelaUsuario:
             return cpf, senha
         else:
             print('CPF e/ou Senha incorreto(s)!')
+
+    def tela_cadastro(self,cpfs):
+        print("Realizar cadastro de um usuário!")
+        nome = input('Nome: ')
+        cpf = input('CPF: ')
+        while type(cpf) == str:
+            try:
+                cpf = int(cpf)
+                if cpf in cpfs:
+                    raise ValueError
+            except ValueError:
+                print('CPF invalido ou ja cadastrado! Digite novamente')
+                cpf = input('CPF: ')
+        empresa = input('Empresa: ')
+        email = input('Email: ')
+        senha1 = input('Senha: ')
+        senha2 = input('Digite a senha novamente: ')
+        while senha1 != senha2:
+            print('Senha digitada pela segunda vez foi diferente da primera')
+            print('Digite novamente!')
+            senha1 = input('Senha: ')
+            senha2 = input('Digite a senha novamente: ')
+        return nome, cpf, empresa, email, senha1
+
+    def tela_ver_dados(self, nome, cpf, email, empresa):
+        print(f'Nome: {nome}\nCPF: {cpf}\nEmail: {email}\nEmpresa: {empresa}')
