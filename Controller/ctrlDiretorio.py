@@ -37,3 +37,9 @@ class CtrlDiretorio:
 
     def ver_cota(self, diretorio: Diretorio):
         return diretorio.cota
+
+    def mostrar_arquivos(self, diretorio: Diretorio):
+        lista_arquivos = []
+        for arquivos in diretorio.arquivos:
+            lista_arquivos.append([arquivos.nome, arquivos.data, arquivos.tamanho])
+        return lista_arquivos

@@ -18,7 +18,7 @@ class Arquivo:
 
     @property
     def data(self):
-        return self.__path
+        return self.__data
 
     @property
     def path(self):

@@ -52,13 +52,19 @@ class Sistema:
                 while True:
                     opcao_diretorio = self.__controlador_diretorio.tela_diretorio.tela_principal_diretorio()
                     if opcao_diretorio == 1:
-                        self.__controlador_diretorio.tela_diretorio.tela_ver_arquivos()
+                        diretorio = self.__controlador_diretorio.diretorios[self.__usuario_ativo.cpf]
+                        arquivos = self.__controlador_diretorio.mostrar_arquivos(diretorio)
+                        self.__controlador_diretorio.tela_diretorio.tela_ver_arquivos(arquivos)
                     elif opcao_diretorio == 2:
                         path = (self.__controlador_diretorio.tela_diretorio.tela_enviar_arquivo())
                         diretorio = self.__controlador_diretorio.diretorios[self.__usuario_ativo.cpf]
-                        diretorio.adicionar_arquivo(path, self.__usuario_ativo)
+                        validacao = diretorio.adicionar_arquivo(path, self.__usuario_ativo)
+                        self.__controlador_diretorio.tela_diretorio.tela_mensagem(validacao)
                     elif opcao_diretorio == 3:
-                        self.__controlador_diretorio.tela_diretorio.tela_excluir_arquivo()
+                        diretorio = self.__controlador_diretorio.diretorios[self.__usuario_ativo.cpf]
+                        arquivos = self.__controlador_diretorio.mostrar_arquivos(diretorio)
+                        excluido = self.__controlador_diretorio.tela_diretorio.tela_excluir_arquivo(arquivos)
+                        diretorio.excluir_arquivo(excluido)
                     elif opcao_diretorio == 4:
                         diretorio = self.__controlador_diretorio.diretorios[self.__usuario_ativo.cpf]
                         cota = self.__controlador_diretorio.ver_cota(diretorio)
@@ -66,7 +72,10 @@ class Sistema:
                     else:
                         break
             elif opcao == 2:
-                self.__controlador_conta.ver_dados()
+                self.__controlador_conta.ver_dados(self.__usuario_ativo)
 
 if __name__ == "__main__":
     Sistema().menu()
+#C:\\Users\\jv_dj\\Desktop\\teste.py
+#C:\\Users\\jv_dj\\Desktop\\jv\\VIAGEM.png
+#FileNotFoundError
