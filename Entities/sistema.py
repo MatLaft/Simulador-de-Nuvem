@@ -56,8 +56,8 @@ class Sistema:
                         arquivos = self.__controlador_diretorio.mostrar_arquivos(diretorio)
                         self.__controlador_diretorio.tela_diretorio.tela_ver_arquivos(arquivos)
                     elif opcao_diretorio == 2:
-                        path = (self.__controlador_diretorio.tela_diretorio.tela_enviar_arquivo())
                         diretorio = self.__controlador_diretorio.diretorios[self.__usuario_ativo.cpf]
+                        path = (self.__controlador_diretorio.tela_diretorio.tela_enviar_arquivo())
                         validacao = diretorio.adicionar_arquivo(path, self.__usuario_ativo)
                         self.__controlador_diretorio.tela_diretorio.tela_mensagem(validacao)
                     elif opcao_diretorio == 3:
@@ -78,4 +78,5 @@ if __name__ == "__main__":
     Sistema().menu()
 #C:\\Users\\jv_dj\\Desktop\\teste.py
 #C:\\Users\\jv_dj\\Desktop\\jv\\VIAGEM.png
-#FileNotFoundError
+#C:\\Users\\jv_dj\\Downloads\\thonny-3.3.13.exe
+

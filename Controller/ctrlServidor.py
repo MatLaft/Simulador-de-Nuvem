@@ -2,7 +2,6 @@ from Entities.servidor import Servidor
 from pathlib import Path
 import os
 import shutil
-from View.telaServidor import *
 
 
 class CtrlServidor:

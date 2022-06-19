@@ -11,30 +11,64 @@ class TelaDiretorio:
         print("3 - Excluir arquivo")
         print("4 - Ver Cota de armazenamento")
         print("0 - Voltar")
-        opcao = int(input("Opcao: "))
+        opcao = input("Opção: ")
+        while type(opcao) != int:
+            try:
+                opcao = int(opcao)
+                if 0 <= opcao <= 4:
+                    break
+                else:
+                    raise IndexError
+            except ValueError:
+                print("Digite um número!")
+                opcao = input("Opção: ")
+            except IndexError:
+                print("Digite um número entre 0 e 4!")
+                opcao = input("Opção: ")
         return opcao
 
     def tela_ver_arquivos(self, lista_arquivos: []):
         print("==========LISTA DE ARQUIVOS==========")
         for index, arquivo in enumerate(lista_arquivos):
             print(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
+        print("\n")
 
     def tela_enviar_arquivo(self):
         print("==========ENVIAR ARQUIVO==========")
-        print("Digite o caminho do arquivo ex: (C:\\\\diretorio\\\\arquivo")
-        path = input("Caminho:")
+        print("Digite o caminho do arquivo ex: C:\\\\diretorio\\\\arquivo.extensão \n ou digite ""0"" para cancelar")
+        path = input("Caminho: ")
         return path
 
     def tela_excluir_arquivo(self, lista_arquivos: []):
         print("==========EXCLUIR ARQUIVO==========")
         print("Escolha o arquivo a ser excluído:")
-        for index, arquivo in enumerate(lista_arquivos):
-            print(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
-        arquivo = int(input("Arquivo:"))
-        return arquivo - 1
+        if len(lista_arquivos) == 0:
+            print("Não há arquivos para excluir! \n")
+            return None
+        else:
+            for index, arquivo in enumerate(lista_arquivos):
+                print(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
+            arquivo = input("Arquivo: ")
+            while type(arquivo) != int:
+                try:
+                    arquivo = int(arquivo)
+                    if 1 <= arquivo <= len(lista_arquivos):
+                        break
+                    else:
+                        raise IndexError
+                except ValueError:
+                    print("Digite um número!")
+                    arquivo = input("Opção: ")
+                except IndexError:
+                    if len(lista_arquivos) == 1:
+                        print("Digite o número 1")
+                    else:
+                        print("Digite um número entre 1 e " + str(len(lista_arquivos)))
+                    arquivo = input("Opção: ")
+            return arquivo - 1
 
     def tela_cota(self, cota: int):
-        print("A cota restante é: " + str(cota) + "\n")
+        print("A cota restante é: " + str(cota) + "KB\n")
 
     def tela_mensagem(self, mensagem: str):
         print(mensagem)

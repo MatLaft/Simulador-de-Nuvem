@@ -7,9 +7,9 @@ from Entities.usuario import Usuario
 
 
 class Diretorio:
-    def __init__(self, usuario: Usuario, path: Path):
+    def __init__(self, usuario: Usuario, path: Path, cota: int):
         self.__usuario = usuario
-        self.__cota = 0
+        self.__cota = cota
         self.__arquivos = list()
         self.__path = path
 
@@ -50,10 +50,15 @@ class Diretorio:
                 shutil.copyfile(path_origem, path_colar)
                 data = datetime.today().strftime('%Y-%m-%d %H:%M')
                 novo_arquivo = Arquivo(nome_arquivo, tamanho, data, path_colar)
-                self.__arquivos.append(novo_arquivo)
-                return 'Arquivo adicionado ao diretório!'
+                self.__cota -= tamanho
+                if self.__cota < 0:
+                    self.__cota += tamanho
+                    return 'Arquivo muito grande, verifique sua cota!\n'
+                else:
+                    self.__arquivos.append(novo_arquivo)
+                    return 'Arquivo adicionado ao diretório!\n'
         except FileNotFoundError:
-            return 'Verifique o caminho do arquivo, arquivo não encontrado!'
+            return 'Verifique o caminho do arquivo, arquivo não encontrado!\n'
 
     def excluir_arquivo(self, arquivo: int):
         if isinstance(arquivo, int):

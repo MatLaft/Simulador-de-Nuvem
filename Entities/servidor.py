@@ -6,6 +6,7 @@ class Servidor:
         self.__nome_empresa = nome_empresa
         self.__endereco = Path(endereco)
         self.__diretorios = []
+        self.__cota = 10000
 
     @property
     def nome_empresa(self):
@@ -18,3 +19,7 @@ class Servidor:
     @property
     def diretorios(self):
         return list(self.__diretorios)
+
+    @property
+    def cota(self):
+        return self.__cota

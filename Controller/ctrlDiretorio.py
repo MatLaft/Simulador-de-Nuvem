@@ -23,7 +23,7 @@ class CtrlDiretorio:
             nome_servidor = os.path.dirname(servidor.endereco)
             path_dir = Path(nome_servidor + "\\" + usuario.empresa + "\\" + str(usuario.cpf))
             path_dir.mkdir(parents=True, exist_ok=True)
-            novo_diretorio = Diretorio(usuario, path_dir)
+            novo_diretorio = Diretorio(usuario, path_dir, servidor.cota)
             self.__diretorios[usuario.cpf] = novo_diretorio
             return novo_diretorio
 

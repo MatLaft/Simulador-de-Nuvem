@@ -6,7 +6,7 @@ class TelaSistema:
 
     def tela_login(self, opcao=None):
         if opcao == 1:
-            print('Login feito!')
+            print('Login feito!\n')
         else:
             retorno = input('Digite 0 para voltar ao menu ou ENTER para tentar novamente: ')
             return retorno
