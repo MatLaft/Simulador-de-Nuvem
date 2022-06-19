@@ -43,24 +43,28 @@ class Diretorio:
                     tamanho = (tamanho/1024)
                 else:
                     tamanho = int(tamanho//1024)
-                nome_diretorio = os.path.dirname(self.__path)
-                arquivo = open(nome_diretorio + '\\' + str(usuario.cpf) + '\\' + nome_arquivo, "a")
-                path_colar = Path(nome_diretorio + '\\' + str(usuario.cpf) + '\\' + nome_arquivo)
-                arquivo.close()
-                shutil.copyfile(path_origem, path_colar)
-                data = datetime.today().strftime('%Y-%m-%d %H:%M')
-                novo_arquivo = Arquivo(nome_arquivo, tamanho, data, path_colar)
-                self.__cota -= tamanho
-                if self.__cota < 0:
-                    self.__cota += tamanho
-                    return 'Arquivo muito grande, verifique sua cota!\n'
+                if self.__cota - tamanho < 0:
+                    return 'Arquivo muito grande, verifique sua cota!'
                 else:
+                    self.__cota -= tamanho
+                    nome_diretorio = os.path.dirname(self.__path)
+                    arquivo = open(nome_diretorio + '\\' + str(usuario.cpf) + '\\' + nome_arquivo, "a")
+                    path_colar = Path(nome_diretorio + '\\' + str(usuario.cpf) + '\\' + nome_arquivo)
+                    arquivo.close()
+                    shutil.copyfile(path_origem, path_colar)
+                    data = datetime.today().strftime('%Y-%m-%d %H:%M')
+                    novo_arquivo = Arquivo(nome_arquivo, tamanho, data, path_colar)
                     self.__arquivos.append(novo_arquivo)
-                    return 'Arquivo adicionado ao diretório!\n'
+                    return 'Arquivo adicionado ao diretório!'
         except FileNotFoundError:
-            return 'Verifique o caminho do arquivo, arquivo não encontrado!\n'
+            return 'Verifique o caminho do arquivo, arquivo não encontrado!'
+        except PermissionError:
+            return 'Digite um caminho válido!'
+        except Exception:
+            return 'Algo deu errado, tente novamente!'
 
     def excluir_arquivo(self, arquivo: int):
         if isinstance(arquivo, int):
             excluido = self.__arquivos.pop(arquivo)
             os.remove(excluido.path)
+            self.__cota += excluido.tamanho

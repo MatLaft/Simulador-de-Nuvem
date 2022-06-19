@@ -43,3 +43,28 @@ class CtrlDiretorio:
         for arquivos in diretorio.arquivos:
             lista_arquivos.append([arquivos.nome, arquivos.data, arquivos.tamanho])
         return lista_arquivos
+
+    def menu_diretorio(self, usuario: Usuario):
+        while True:
+                    opcao_diretorio = self.tela_diretorio.tela_principal_diretorio()
+                    if opcao_diretorio == 1:
+                        diretorio = self.diretorios[usuario.cpf]
+                        arquivos = self.mostrar_arquivos(diretorio)
+                        self.tela_diretorio.tela_ver_arquivos(arquivos)
+                    elif opcao_diretorio == 2:
+                        diretorio = self.diretorios[usuario.cpf]
+                        path = (self.tela_diretorio.tela_enviar_arquivo())
+                        if path != "0":                            
+                            validacao = diretorio.adicionar_arquivo(path, usuario)
+                            self.tela_diretorio.tela_mensagem(validacao)
+                    elif opcao_diretorio == 3:
+                        diretorio = self.diretorios[usuario.cpf]
+                        arquivos = self.mostrar_arquivos(diretorio)
+                        excluido = self.tela_diretorio.tela_excluir_arquivo(arquivos)
+                        diretorio.excluir_arquivo(excluido)
+                    elif opcao_diretorio == 4:
+                        diretorio = self.diretorios[usuario.cpf]
+                        cota = self.ver_cota(diretorio)
+                        self.tela_diretorio.tela_cota(cota)
+                    else:
+                        break

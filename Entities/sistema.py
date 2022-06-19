@@ -38,7 +38,6 @@ class Sistema:
                 novo_servidor = self.__controlador_servidor.adicionar_servidor(novo_usuario.empresa)
                 novo_diretorio = self.__controlador_diretorio.adicionar_diretorio(novo_servidor, novo_usuario)
                 novo_servidor.diretorios.append(novo_diretorio)
-                print(novo_diretorio.path)
 
     def menu(self):
         # implementar diretorio e cota
@@ -49,28 +48,7 @@ class Sistema:
                 self.__usuario_ativo = None
                 self.menu_inical()
             elif opcao == 1:
-                while True:
-                    opcao_diretorio = self.__controlador_diretorio.tela_diretorio.tela_principal_diretorio()
-                    if opcao_diretorio == 1:
-                        diretorio = self.__controlador_diretorio.diretorios[self.__usuario_ativo.cpf]
-                        arquivos = self.__controlador_diretorio.mostrar_arquivos(diretorio)
-                        self.__controlador_diretorio.tela_diretorio.tela_ver_arquivos(arquivos)
-                    elif opcao_diretorio == 2:
-                        diretorio = self.__controlador_diretorio.diretorios[self.__usuario_ativo.cpf]
-                        path = (self.__controlador_diretorio.tela_diretorio.tela_enviar_arquivo())
-                        validacao = diretorio.adicionar_arquivo(path, self.__usuario_ativo)
-                        self.__controlador_diretorio.tela_diretorio.tela_mensagem(validacao)
-                    elif opcao_diretorio == 3:
-                        diretorio = self.__controlador_diretorio.diretorios[self.__usuario_ativo.cpf]
-                        arquivos = self.__controlador_diretorio.mostrar_arquivos(diretorio)
-                        excluido = self.__controlador_diretorio.tela_diretorio.tela_excluir_arquivo(arquivos)
-                        diretorio.excluir_arquivo(excluido)
-                    elif opcao_diretorio == 4:
-                        diretorio = self.__controlador_diretorio.diretorios[self.__usuario_ativo.cpf]
-                        cota = self.__controlador_diretorio.ver_cota(diretorio)
-                        self.__controlador_diretorio.tela_diretorio.tela_cota(cota)
-                    else:
-                        break
+                self.__controlador_diretorio.menu_diretorio(self.__usuario_ativo)
             elif opcao == 2:
                 self.__controlador_conta.ver_dados(self.__usuario_ativo)
 

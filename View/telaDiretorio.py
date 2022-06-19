@@ -5,7 +5,7 @@ class TelaDiretorio:
         pass
 
     def tela_principal_diretorio(self):
-        print("==========MEU DIRETÓRIO==========")
+        print("\n==========MEU DIRETÓRIO==========")
         print("1 - Ver arquivos")
         print("2 - Adicionar arquivo")
         print("3 - Excluir arquivo")
@@ -28,20 +28,25 @@ class TelaDiretorio:
         return opcao
 
     def tela_ver_arquivos(self, lista_arquivos: []):
-        print("==========LISTA DE ARQUIVOS==========")
-        for index, arquivo in enumerate(lista_arquivos):
-            print(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
-        print("\n")
+        print("\n==========LISTA DE ARQUIVOS==========")
+        if len(lista_arquivos) == 0:
+            print("Não há arquivos no diretório!\n")
+            return None
+        else:
+            for index, arquivo in enumerate(lista_arquivos):
+                print(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
+            print("\n")
 
     def tela_enviar_arquivo(self):
-        print("==========ENVIAR ARQUIVO==========")
-        print("Digite o caminho do arquivo ex: C:\\\\diretorio\\\\arquivo.extensão \n ou digite ""0"" para cancelar")
+        print("\n==========ENVIAR ARQUIVO==========")
+        print("Digite o caminho do arquivo ex: C:\\\\diretorio\\\\arquivo.extensão \nDigite ""0"" para cancelar")
         path = input("Caminho: ")
+        print()
         return path
 
     def tela_excluir_arquivo(self, lista_arquivos: []):
-        print("==========EXCLUIR ARQUIVO==========")
-        print("Escolha o arquivo a ser excluído:")
+        print("\n==========EXCLUIR ARQUIVO==========")
+        print("Escolha o arquivo a ser excluído: \nDigite ""0"" para cancelar")
         if len(lista_arquivos) == 0:
             print("Não há arquivos para excluir! \n")
             return None
@@ -52,7 +57,9 @@ class TelaDiretorio:
             while type(arquivo) != int:
                 try:
                     arquivo = int(arquivo)
-                    if 1 <= arquivo <= len(lista_arquivos):
+                    if arquivo == 0:
+                        return None
+                    elif 1 <= arquivo <= len(lista_arquivos):
                         break
                     else:
                         raise IndexError
@@ -68,7 +75,7 @@ class TelaDiretorio:
             return arquivo - 1
 
     def tela_cota(self, cota: int):
-        print("A cota restante é: " + str(cota) + "KB\n")
+        print("\nA cota restante é: " + str(cota) + "KB")
 
     def tela_mensagem(self, mensagem: str):
         print(mensagem)

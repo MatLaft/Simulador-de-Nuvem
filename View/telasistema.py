@@ -12,6 +12,7 @@ class TelaSistema:
             return retorno
 
     def tela_menu_inicial(self):
+        print("\n==========SISTEMA DE ARQUIVOS==========")
         print('1 - Logar\n2 - Cadastrar Usuário\n0 - Fechar')
         opcao = input('Opção: ')
         while type(opcao) == str:
@@ -26,6 +27,7 @@ class TelaSistema:
                 opcao = input('Opção: ')
 
     def tela_menu(self):
+        print("\n==========MENU SISTEMA==========")
         print('1 - Diretorio \n2 - Ver dados de Usuario\n \n0 - Deslogar')
         opcao = input('Opção: ')
         while type(opcao) == str:
