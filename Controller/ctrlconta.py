@@ -1,6 +1,8 @@
-from Model.usuario import *
+from Entities.usuario import *
 from View.telaconta import *
-from Model.admin import *
+from Entities.admin import *
+from Controller.ctrlDiretorio import *
+from Controller.ctrlServidor import *
 
 
 class CtrlConta:
@@ -17,17 +19,23 @@ class CtrlConta:
     def ver_contas(self):
         return self.__tela.tela_contas(self.relacao_cpf_nome())
 
+
+    @property
+    def tela(self):
+        return self.__tela
+
     @property
     def contas(self):
         return list(self.__contas.values())
 
     def cadastrar_usuario(self):
-        diretorio = 'DIRETORIO'
         nome, cpf, empresa, email, senha = self.__tela.tela_cadastro(self.__contas.keys())
         if isinstance(nome, str) and isinstance(cpf, int) and isinstance(email, str) and isinstance(senha, str) \
                 and isinstance(empresa, str) and cpf not in self.__contas.keys():
+            diretorio = str(cpf)
             usuario = Usuario(nome, cpf, email, senha, diretorio, empresa)
             self.__contas[usuario.cpf] = usuario
+            return usuario
 
     def cadastrar_admin(self):
         diretorio = 'DIRETORIO'
