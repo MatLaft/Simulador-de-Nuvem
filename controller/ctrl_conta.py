@@ -40,13 +40,13 @@ class CtrlConta:
         conta_selecionada = conta
         opcao = self.__tela_conta.tela_alterar_conta()
         if opcao == 1:
-            conta_selecionada.nome = self.__tela_conta.alterar_nome()
+            conta_selecionada.nome = self.__tela_conta.tela_alterar_nome()
             conta_selecionada.log.incluir_log('Nome alterado')
         elif opcao == 2:
-            conta_selecionada.email = self.__tela_conta.alterar_email()
+            conta_selecionada.email = self.__tela_conta.tela_alterar_email()
             conta_selecionada.log.incluir_log('Email alterado')
         elif opcao == 3:
-            conta_selecionada.senha = self.__tela_conta.alterar_senha()
+            conta_selecionada.senha = self.__tela_conta.tela_alterar_senha()
             conta_selecionada.log.incluir_log('Senha alterada')
         elif opcao == 0:
             return

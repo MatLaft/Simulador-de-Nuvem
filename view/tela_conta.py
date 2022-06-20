@@ -33,7 +33,7 @@ class TelaConta:
         else:
             print('\nEscolha inválida')
 
-    def alterar_senha(self):
+    def tela_alterar_senha(self):
         primeira = input('Digite uma nova senha: ')
         segunda = input('Digite a senha novamente: ')
         while True:
@@ -45,7 +45,7 @@ class TelaConta:
                 segunda = input('Digite a senha novamente: ')
         return primeira
 
-    def alterar_nome(self):
+    def tela_alterar_nome(self):
         primeira = input('Digite um novo nome: ')
         segunda = input('Digite o nome novamente: ')
         while True:
@@ -57,7 +57,7 @@ class TelaConta:
                 segunda = input('Digite o nome novamente: ')
         return primeira
 
-    def alterar_email(self):
+    def tela_alterar_email(self):
         primeira = input('Digite um novo email: ')
         segunda = input('Digite o email novamente: ')
         while True:

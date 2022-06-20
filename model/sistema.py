@@ -46,7 +46,7 @@ class Sistema:
                 elif isinstance(novo_usuario, Admin):
                     self.log.incluir_log(f'Administrador Cadastrado {novo_usuario.cpf}')
                 novo_servidor = self.__controlador_servidor.adicionar_servidor(novo_usuario.empresa)
-                self.log.incluir_log(f'Servidor criado {novo_usuario.empresa}')
+                self.log.incluir_log(f'Servidor {novo_usuario.empresa} criado ')
                 novo_diretorio = self.__controlador_diretorio.adicionar_diretorio(novo_servidor, novo_usuario)
                 novo_servidor.diretorios.append(novo_diretorio)
                 self.log.incluir_log(f'Diretório {novo_usuario.cpf} adicionado')

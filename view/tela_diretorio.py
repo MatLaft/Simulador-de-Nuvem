@@ -10,7 +10,7 @@ class TelaDiretorio:
         print("2 - Adicionar arquivo")
         print("3 - Excluir arquivo")
         print("4 - Ver Cota de armazenamento")
-        print("0 - Voltar")
+        print("\n0 - Voltar")
         opcao = input("Opção: ")
         while type(opcao) != int:
             try:
@@ -40,7 +40,6 @@ class TelaDiretorio:
         print("\n==========ENVIAR ARQUIVO==========")
         print("Digite o caminho do arquivo ex: C:\\\\diretorio\\\\arquivo.extensão \n\nDigite ""0"" para voltar")
         path = input("Caminho: ")
-        print()
         return path
 
     def tela_excluir_arquivo(self, lista_arquivos: []):
@@ -52,7 +51,7 @@ class TelaDiretorio:
         else:
             for index, arquivo in enumerate(lista_arquivos):
                 print(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
-            print("Digite ""0"" para voltar ")
+            print("Digite ""0"" para voltar\n")
             arquivo = input("Arquivo: ")
             while type(arquivo) != int:
                 try:
@@ -75,7 +74,7 @@ class TelaDiretorio:
             return arquivo - 1
 
     def tela_cota(self, cota: int):
-        print("\nA cota restante é: " + str(cota) + "KB")
+        print(f"\nA cota restante é: {cota:.2f} KB")
 
     def tela_mensagem(self, mensagem: str):
         print(mensagem)
