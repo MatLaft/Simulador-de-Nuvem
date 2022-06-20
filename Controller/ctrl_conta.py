@@ -1,13 +1,11 @@
-from Entities.usuario import *
-from View.telaconta import *
-from Entities.admin import *
-from Controller.ctrlDiretorio import *
-from Controller.ctrlServidor import *
+from view.tela_conta import *
+from model.admin import *
+from controller.ctrl_diretorio import *
 
 
 class CtrlConta:
     def __init__(self):
-        self.__contas = {123:Admin('Adm',1,'adm','adm','1','ADM'),}
+        self.__contas = {}
         self.__tela = TelaConta()
 
     @property
@@ -17,7 +15,6 @@ class CtrlConta:
     @property
     def contas(self):
         return list(self.__contas.values())
-
 
     def relacao_cpf_nome(self):
         dados_tela = []
@@ -29,7 +26,7 @@ class CtrlConta:
         return self.__tela.tela_contas(self.relacao_cpf_nome())
 
     def cadastrar_conta(self):
-        nome, cpf, empresa, email, senha,opcao = self.__tela.tela_cadastro(self.__contas.keys())
+        nome, cpf, empresa, email, senha, opcao = self.__tela.tela_cadastro(self.__contas.keys())
         if isinstance(nome, str) and isinstance(cpf, int) and isinstance(email, str) and isinstance(senha, str) \
                 and isinstance(empresa, str) and cpf not in self.__contas.keys():
             diretorio = str(cpf)
@@ -68,6 +65,6 @@ class CtrlConta:
             return
 
     def ver_dados(self, conta):
-        nome, cpf, email, empresa= conta.nome, conta.cpf, conta.email, conta.empresa
+        nome, cpf, email, empresa = conta.nome, conta.cpf, conta.email, conta.empresa
         self.__tela.tela_ver_dados(nome, cpf, email, empresa)
         self.alterar_conta(conta)

@@ -1,9 +1,9 @@
-from Entities.arquivo import Arquivo
+from model.arquivo import Arquivo
 from pathlib import Path
 import shutil
 import os
 from datetime import datetime
-from Entities.usuario import Usuario
+from model.usuario import Usuario
 
 
 class Diretorio:

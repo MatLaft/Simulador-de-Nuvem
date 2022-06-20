@@ -1,5 +1,5 @@
 from datetime import datetime
-from View.telalogs import TelaLog
+from view.tela_logs import TelaLog
 
 class Log:
     def __init__(self):

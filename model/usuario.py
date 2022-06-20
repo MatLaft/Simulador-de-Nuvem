@@ -1,4 +1,4 @@
-from Entities.conta import Conta
+from model.conta import Conta
 
 
 class Usuario(Conta):

@@ -1,8 +1,8 @@
-from Controller.ctrlconta import *
-from Controller.ctrlDiretorio import *
-from Controller.ctrlServidor import *
-from View.telasistema import *
-from Entities.logs import Log
+from controller.ctrl_conta import *
+from controller.ctrl_diretorio import *
+from controller.ctrl_servidor import *
+from view.tela_sistema import *
+from model.logs import Log
 
 
 class Sistema:
@@ -43,10 +43,10 @@ class Sistema:
                 novo_usuario = self.__controlador_conta.cadastrar_conta()
                 if isinstance(novo_usuario, Usuario):
                     self.log.incluir_log(f'Usuario Cadastrado')
-                elif isinstance(novo_usuario,Admin):
+                elif isinstance(novo_usuario, Admin):
                     self.log.incluir_log(f'Administrador Cadastrado')
                 novo_servidor = self.__controlador_servidor.adicionar_servidor(novo_usuario.empresa)
-                self.log.incluir_log('Servidor criado')             ##CORRIGIR IMPLEMENTACAO_DE_CRIACAO_DUPLICADA
+                self.log.incluir_log('Servidor criado')
                 novo_diretorio = self.__controlador_diretorio.adicionar_diretorio(novo_servidor, novo_usuario)
                 novo_servidor.diretorios.append(novo_diretorio)
                 self.log.incluir_log(f'Diretório {novo_usuario.cpf} adicionado')
@@ -72,7 +72,7 @@ class Sistema:
                     self.usuario_ativo.log.incluir_log('Saiu do sistema')
                     for i in self.usuario_ativo.log.log:
                         if i not in self.log.log:
-                            self.log.incluir_log(f'{i}',self.usuario_ativo,'Sistema')
+                            self.log.incluir_log(f'{i}', self.usuario_ativo, 'Sistema')
                     self.__usuario_ativo = None
                     self.menu_inical()
                 elif opcao == 1:

@@ -35,7 +35,6 @@ class TelaDiretorio:
         else:
             for index, arquivo in enumerate(lista_arquivos):
                 print(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
-            print("\n")
 
     def tela_enviar_arquivo(self):
         print("\n==========ENVIAR ARQUIVO==========")

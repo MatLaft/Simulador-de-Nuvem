@@ -1,8 +1,8 @@
-from Entities.diretorio import Diretorio, Usuario, Path
+from model.diretorio import Diretorio, Usuario, Path
 import os
-from Entities.servidor import Servidor
-from View.telaDiretorio import *
-from Entities.conta import Conta
+from model.servidor import Servidor
+from view.tela_diretorio import *
+from model.conta import Conta
 
 
 class CtrlDiretorio:

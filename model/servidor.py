@@ -1,5 +1,5 @@
 from pathlib import Path
-from Entities.logs import Log
+from model.logs import Log
 
 
 class Servidor:

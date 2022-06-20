@@ -1,4 +1,4 @@
-from Entities.servidor import Servidor
+from model.servidor import Servidor
 from pathlib import Path
 
 
