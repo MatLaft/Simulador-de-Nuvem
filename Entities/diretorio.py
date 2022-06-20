@@ -4,7 +4,6 @@ import shutil
 import os
 from datetime import datetime
 from Entities.usuario import Usuario
-from Entities.logs import Log
 
 
 class Diretorio:
@@ -13,7 +12,6 @@ class Diretorio:
         self.__cota = cota
         self.__arquivos = list()
         self.__path = path
-        self.__log = Log()
 
     @property
     def usuario(self):
@@ -31,14 +29,6 @@ class Diretorio:
     def arquivos(self):
         return self.__arquivos
 
-    @path.setter
-    def path(self, path: Path):
-        self.__path = path
-
-    @property
-    def log(self):
-        return self.__log
-
     def adicionar_arquivo(self, path: str, usuario: Usuario):
         try:
             if isinstance(path, str):
@@ -50,9 +40,8 @@ class Diretorio:
                 else:
                     tamanho = int(tamanho//1024)
                 if self.__cota - tamanho < 0:
-                    return 'Arquivo muito grande, verifique sua cota!'
+                    return 'Arquivo muito grande, verifique sua cota!', 1
                 else:
-                    self.__cota -= tamanho
                     nome_diretorio = os.path.dirname(self.__path)
                     arquivo = open(nome_diretorio + '\\' + str(usuario.cpf) + '\\' + nome_arquivo, "a")
                     path_colar = Path(nome_diretorio + '\\' + str(usuario.cpf) + '\\' + nome_arquivo)
@@ -61,17 +50,19 @@ class Diretorio:
                     data = datetime.today().strftime('%Y-%m-%d %H:%M')
                     novo_arquivo = Arquivo(nome_arquivo, tamanho, data, path_colar)
                     self.__arquivos.append(novo_arquivo)
-                    self.log.incluir_log(f'Arquivo + {nome_arquivo} adicionado!')
-                    return 'Arquivo adicionado ao diretório!'
+                    self.__cota -= tamanho
+                    self.usuario.log.incluir_log(f'Arquivo {nome_arquivo} Adicionado')
+                    return 'Arquivo adicionado ao diretório!', 1
         except FileNotFoundError:
-            return 'Verifique o caminho do arquivo, arquivo não encontrado!'
+            return 'Verifique o caminho do arquivo, arquivo não encontrado!', 1
         except PermissionError:
-            return 'Digite um caminho válido!'
+            return 'Digite um caminho válido!', 1
         except Exception:
-            return 'Algo deu errado, tente novamente!'
+            return 'Algo deu errado, tente novamente!', 1
 
     def excluir_arquivo(self, arquivo: int):
         if isinstance(arquivo, int):
             excluido = self.__arquivos.pop(arquivo)
             os.remove(excluido.path)
             self.__cota += excluido.tamanho
+            self.usuario.log.incluir_log(f'Arquivo {excluido.nome} Removido')

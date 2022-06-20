@@ -1,4 +1,4 @@
-import time
+from datetime import datetime
 
 class Log:
     def __init__(self):
@@ -9,4 +9,4 @@ class Log:
         return self.__log
 
     def incluir_log(self, string: str):
-        self.__log.append(time.ctime()+': ' +string)
+        self.__log.append(datetime.now().strftime('%d/%m/%Y %H:%M: ') + string)

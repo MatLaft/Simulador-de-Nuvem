@@ -8,7 +8,7 @@ from Controller.ctrlServidor import *
 class CtrlConta:
     def __init__(self):
         self.__contas = {}
-        self.__tela = TelaUsuario()
+        self.__tela = TelaConta()
 
     @property
     def tela(self):
@@ -28,25 +28,21 @@ class CtrlConta:
     def ver_contas(self):
         return self.__tela.tela_contas(self.relacao_cpf_nome())
 
-    def cadastrar_usuario(self):
-        nome, cpf, empresa, email, senha = self.__tela.tela_cadastro(self.__contas.keys())
+    def cadastrar_conta(self):
+        nome, cpf, empresa, email, senha,opcao = self.__tela.tela_cadastro(self.__contas.keys())
         if isinstance(nome, str) and isinstance(cpf, int) and isinstance(email, str) and isinstance(senha, str) \
                 and isinstance(empresa, str) and cpf not in self.__contas.keys():
             diretorio = str(cpf)
-            usuario = Usuario(nome, cpf, email, senha, diretorio, empresa)
-            usuario.log.incluir_log(f'Usuario Cadastrado')
-            self.__contas[usuario.cpf] = usuario
-            return usuario
+            if opcao == 2:
+                usuario = Usuario(nome, cpf, email, senha, diretorio, empresa)
+                self.__contas[usuario.cpf] = usuario
+                return usuario
+            elif opcao == 1:
+                adm = Admin(nome, cpf, email, senha, diretorio, empresa)
+                self.__contas[adm.cpf] = adm
+                return adm
 
-    def cadastrar_admin(self):
-        diretorio = 'DIRETORIO'
-        nome, cpf, empresa, email, senha = self.__tela.tela_cadastro()
-        if isinstance(nome, str) and isinstance(cpf, int) and isinstance(email, str) and isinstance(senha, str) \
-                and isinstance(empresa, str) and cpf not in self.__contas.keys():
-            admin = Admin(nome, cpf, email, senha, diretorio, empresa)
-            self.__contas[admin.cpf] = admin
-
-    def selecionar_usuario(self):
+    def selecionar_conta(self):
         conta_selecionada = self.__tela.tela_escolher_conta(self.relacao_cpf_nome())
         while type(conta_selecionada) == str:
             try:
@@ -59,8 +55,8 @@ class CtrlConta:
                 print(f'CPF nao cadastrado!')
                 conta_selecionada = self.__tela.tela_escolher_conta(self.relacao_cpf_nome())
 
-    def alterar_conta(self,usuario):
-        conta_selecionada = usuario
+    def alterar_conta(self, conta):
+        conta_selecionada = conta
         opcao = self.__tela.tela_alterar_conta()
         if opcao == 1:
             conta_selecionada.nome = self.__tela.alterar_nome()
@@ -84,7 +80,7 @@ class CtrlConta:
             self.__tela.tela_login()
             return
 
-    def ver_dados(self, usuario):
-        nome, cpf, email, empresa= usuario.nome, usuario.cpf, usuario.email, usuario.empresa
+    def ver_dados(self, conta):
+        nome, cpf, email, empresa= conta.nome, conta.cpf, conta.email, conta.empresa
         self.__tela.tela_ver_dados(nome, cpf, email, empresa)
-        self.alterar_conta(usuario)
+        self.alterar_conta(conta)

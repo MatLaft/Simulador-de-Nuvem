@@ -1,6 +1,6 @@
 
 
-class TelaUsuario:
+class TelaConta:
     def __init__(self):
         pass
 
@@ -95,6 +95,7 @@ class TelaUsuario:
 
     def tela_cadastro(self,cpfs):
         print("Realizar cadastro de um usuário!")
+        opcao = input('1 - Admnistrador 2 - Usuario\n Opcao: ')
         nome = input('Nome: ')
         cpf = input('CPF: ')
         while type(cpf) == str:
@@ -114,7 +115,7 @@ class TelaUsuario:
             print('Digite novamente!')
             senha1 = input('Senha: ')
             senha2 = input('Digite a senha novamente: ')
-        return nome, cpf, empresa, email, senha1
+        return nome, cpf, empresa, email, senha1, opcao
 
     def tela_ver_dados(self, nome, cpf, email, empresa):
         print(f'Nome: {nome}\nCPF: {cpf}\nEmail: {email}\nEmpresa: {empresa}')

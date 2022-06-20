@@ -1,6 +1,5 @@
 from Entities.diretorio import Diretorio, Usuario, Path
 import os
-import shutil
 from Entities.servidor import Servidor
 from View.telaDiretorio import *
 
@@ -27,14 +26,6 @@ class CtrlDiretorio:
             self.__diretorios[usuario.cpf] = novo_diretorio
             return novo_diretorio
 
-    def excluir_diretorio(self, diretorio: Diretorio):
-        if isinstance(diretorio, Diretorio) and diretorio in self.__diretorios:
-            self.__diretorios.remove(diretorio.path)
-            try:
-                os.remove(diretorio.path)
-            except Exception:
-                shutil.rmtree(diretorio.path)
-
     def ver_cota(self, diretorio: Diretorio):
         return diretorio.cota
 
@@ -46,25 +37,29 @@ class CtrlDiretorio:
 
     def menu_diretorio(self, usuario: Usuario):
         while True:
-                    opcao_diretorio = self.tela_diretorio.tela_principal_diretorio()
-                    if opcao_diretorio == 1:
-                        diretorio = self.diretorios[usuario.cpf]
-                        arquivos = self.mostrar_arquivos(diretorio)
-                        self.tela_diretorio.tela_ver_arquivos(arquivos)
-                    elif opcao_diretorio == 2:
-                        diretorio = self.diretorios[usuario.cpf]
-                        path = (self.tela_diretorio.tela_enviar_arquivo())
-                        if path != "0":                            
-                            validacao = diretorio.adicionar_arquivo(path, usuario)
-                            self.tela_diretorio.tela_mensagem(validacao)
-                    elif opcao_diretorio == 3:
-                        diretorio = self.diretorios[usuario.cpf]
-                        arquivos = self.mostrar_arquivos(diretorio)
-                        excluido = self.tela_diretorio.tela_excluir_arquivo(arquivos)
-                        diretorio.excluir_arquivo(excluido)
-                    elif opcao_diretorio == 4:
-                        diretorio = self.diretorios[usuario.cpf]
-                        cota = self.ver_cota(diretorio)
-                        self.tela_diretorio.tela_cota(cota)
+            opcao_diretorio = self.tela_diretorio.tela_principal_diretorio()
+            if opcao_diretorio == 1:
+                diretorio = self.diretorios[usuario.cpf]
+                arquivos = self.mostrar_arquivos(diretorio)
+                self.tela_diretorio.tela_ver_arquivos(arquivos)
+            elif opcao_diretorio == 2:
+                permanencia = 1
+                while permanencia == 1:
+                    diretorio = self.diretorios[usuario.cpf]
+                    path = (self.tela_diretorio.tela_enviar_arquivo())
+                    if path != "0":
+                        validacao, permanencia = diretorio.adicionar_arquivo(path, usuario)
+                        self.tela_diretorio.tela_mensagem(validacao)
                     else:
-                        break
+                        permanencia = 0
+            elif opcao_diretorio == 3:
+                diretorio = self.diretorios[usuario.cpf]
+                arquivos = self.mostrar_arquivos(diretorio)
+                excluido = self.tela_diretorio.tela_excluir_arquivo(arquivos)
+                diretorio.excluir_arquivo(excluido)
+            elif opcao_diretorio == 4:
+                diretorio = self.diretorios[usuario.cpf]
+                cota = self.ver_cota(diretorio)
+                self.tela_diretorio.tela_cota(cota)
+            else:
+                break
