@@ -59,8 +59,7 @@ class Sistema:
                 if opcao == 0:
                     self.usuario_ativo.log.incluir_log('Saiu do sistema')
                     for i in self.usuario_ativo.log.log:
-                        if i not in self.log.log:
-                            self.log.log.append(f'##{self.usuario_ativo.empresa}/{self.usuario_ativo.cpf}## {i}')
+                        self.log.incluir_log(f'##{self.usuario_ativo.empresa}/{self.usuario_ativo.cpf}## {i}')
                     self.__usuario_ativo = None
                     self.menu_inical()
                 elif opcao == 1:
@@ -91,8 +90,8 @@ class Sistema:
 # C:\\Users\\jv_dj\\Desktop\\jv\\VIAGEM.png
 # C:\\Users\\jv_dj\\Downloads\\thonny-3.3.13.exe
 
-# oi = Sistema()
-# oi.menu()
+oi = Sistema()
+oi.menu()
 # for i in oi.log.log:
 #     print(i)
 # print(oi._Sistema__controlador_servidor.nome_empresas)

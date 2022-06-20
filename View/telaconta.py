@@ -94,8 +94,19 @@ class TelaConta:
             print('CPF e/ou Senha incorreto(s)!')
 
     def tela_cadastro(self,cpfs):
+        senhaADM = 'ADEMIR'
         print("Realizar cadastro de um usuário!")
-        opcao = input('1 - Administrador 2 - Usuário\n Opção: ')
+        opcao = input('Aperte <ENTER> para continuar!')
+        if opcao != 'ContaAdemir':
+            opcao = '2'
+        if opcao == 'ContaAdemir':
+            senha = input('Senha para ADM: ')
+            opcao = '1'
+            while senha != senhaADM:
+                senha = input('Senha invalida!\nSenha para ADM: ')
+                if senha == '0':
+                    opcao = '2'
+                    break
         nome = input('Nome: ')
         while nome == '':
             print('Entrada de nome obrigatória')
