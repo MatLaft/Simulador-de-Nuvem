@@ -2,6 +2,7 @@ from Controller.ctrlconta import *
 from Controller.ctrlDiretorio import *
 from Controller.ctrlServidor import *
 from View.telasistema import *
+from Entities.logs import Log
 
 
 class Sistema:
@@ -11,10 +12,15 @@ class Sistema:
         self.__controlador_diretorio = CtrlDiretorio()
         self.__usuario_ativo = None
         self.__tela_sistema = TelaSistema()
+        self.__log = Log()
 
     @property
     def usuario_ativo(self):
         return self.__usuario_ativo
+
+    @property
+    def log(self):
+        return self.__log
 
     def logar(self):
         while True:

@@ -4,6 +4,7 @@ import shutil
 import os
 from datetime import datetime
 from Entities.usuario import Usuario
+from Entities.logs import Log
 
 
 class Diretorio:
@@ -12,6 +13,7 @@ class Diretorio:
         self.__cota = cota
         self.__arquivos = list()
         self.__path = path
+        self.__log = Log()
 
     @property
     def usuario(self):
@@ -32,6 +34,10 @@ class Diretorio:
     @path.setter
     def path(self, path: Path):
         self.__path = path
+
+    @property
+    def log(self):
+        return self.__log
 
     def adicionar_arquivo(self, path: str, usuario: Usuario):
         try:
@@ -55,6 +61,7 @@ class Diretorio:
                     data = datetime.today().strftime('%Y-%m-%d %H:%M')
                     novo_arquivo = Arquivo(nome_arquivo, tamanho, data, path_colar)
                     self.__arquivos.append(novo_arquivo)
+                    self.log.incluir_log(f'Arquivo + {nome_arquivo} adicionado!')
                     return 'Arquivo adicionado ao diretório!'
         except FileNotFoundError:
             return 'Verifique o caminho do arquivo, arquivo não encontrado!'

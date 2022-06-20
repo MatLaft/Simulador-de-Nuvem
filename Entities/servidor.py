@@ -1,4 +1,5 @@
 from pathlib import Path
+from Entities.logs import Log
 
 
 class Servidor:
@@ -7,6 +8,7 @@ class Servidor:
         self.__endereco = Path(endereco)
         self.__diretorios = []
         self.__cota = 10000
+        self.__log = Log()
 
     @property
     def nome_empresa(self):
@@ -23,3 +25,7 @@ class Servidor:
     @property
     def cota(self):
         return self.__cota
+
+    @property
+    def log(self):
+        return self.__log

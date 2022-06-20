@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from Entities.logs import Log
 
 
 class Conta(ABC):
@@ -10,6 +11,7 @@ class Conta(ABC):
         self.__senha = senha
         self.__diretorio = diretorio
         self.__empresa = empresa
+        self.__log = Log()
 
     @property
     def nome(self):
@@ -64,3 +66,7 @@ class Conta(ABC):
     def empresa(self, empresa):
         if isinstance(empresa, str):
             self.__empresa = empresa
+
+    @property
+    def log(self):
+        return self.__log
