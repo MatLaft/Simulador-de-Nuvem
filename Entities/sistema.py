@@ -54,18 +54,52 @@ class Sistema:
     def menu(self):
         self.menu_inical()
         while self.__usuario_ativo:
-            opcao = self.__tela_sistema.tela_menu()
-            if opcao == 0:
-                self.usuario_ativo.log.incluir_log('Saiu do sistema')
-                for i in self.usuario_ativo.log.log:
-                    if i not in self.log.log:
-                        self.log.log.append(f'({self.usuario_ativo.empresa}/{self.usuario_ativo.cpf}) {i}')
-                self.__usuario_ativo = None
-                self.menu_inical()
-            elif opcao == 1:
-                self.__controlador_diretorio.menu_diretorio(self.__usuario_ativo)
-            elif opcao == 2:
-                self.__controlador_conta.ver_dados(self.__usuario_ativo)
+            if isinstance(self.__usuario_ativo, Usuario):
+                opcao = self.__tela_sistema.tela_menu()
+                if opcao == 0:
+                    self.usuario_ativo.log.incluir_log('Saiu do sistema')
+                    for i in self.usuario_ativo.log.log:
+                        if i not in self.log.log:
+                            self.log.log.append(f'({self.usuario_ativo.empresa}/{self.usuario_ativo.cpf}) {i}')
+                    self.__usuario_ativo = None
+                    self.menu_inical()
+                elif opcao == 1:
+                    self.__controlador_diretorio.menu_diretorio(self.__usuario_ativo)
+                elif opcao == 2:
+                    self.__controlador_conta.ver_dados(self.__usuario_ativo)
+            else:
+                opcao = self.__tela_sistema.tela_menu_admin()
+                if opcao == 0:
+                    self.usuario_ativo.log.incluir_log('Saiu do sistema')
+                    for i in self.usuario_ativo.log.log:
+                        if i not in self.log.log:
+                            self.log.log.append(f'({self.usuario_ativo.empresa}/{self.usuario_ativo.cpf}) {i}')
+                    self.__usuario_ativo = None
+                    self.menu_inical()
+                elif opcao == 1:
+                    self.__controlador_diretorio.menu_diretorio(self.__usuario_ativo)
+                elif opcao == 2:
+                    self.__controlador_conta.ver_dados(self.__usuario_ativo)
+                elif opcao == 3:
+                    logs = self.log.log
+                    self.log.tela_log.print_logs(logs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #if __name__ == "__main__":
     #Sistema().menu()
@@ -73,10 +107,11 @@ class Sistema:
 #C:\\Users\\jv_dj\\Desktop\\jv\\VIAGEM.png
 #C:\\Users\\jv_dj\\Downloads\\thonny-3.3.13.exe
 
-# oi = Sistema()
-# oi.menu()
+oi = Sistema()
+oi.menu()
 # for i in oi.log.log:
 #     print(i)
 # print(oi._Sistema__controlador_servidor.nome_empresas)
 # # for i in oi._Sistema__controlador_conta.contas:
 # #     print(i.log.log)
+#C:\\Users\\mathe\\Desktop\\Untitled Diagram.drawio.png

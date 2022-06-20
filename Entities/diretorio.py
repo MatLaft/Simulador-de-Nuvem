@@ -42,17 +42,26 @@ class Diretorio:
                 if self.__cota - tamanho < 0:
                     return 'Arquivo muito grande, verifique sua cota!', 1
                 else:
-                    nome_diretorio = os.path.dirname(self.__path)
-                    arquivo = open(nome_diretorio + '\\' + str(usuario.cpf) + '\\' + nome_arquivo, "a")
-                    path_colar = Path(nome_diretorio + '\\' + str(usuario.cpf) + '\\' + nome_arquivo)
-                    arquivo.close()
-                    shutil.copyfile(path_origem, path_colar)
-                    data = datetime.today().strftime('%Y-%m-%d %H:%M')
-                    novo_arquivo = Arquivo(nome_arquivo, tamanho, data, path_colar)
-                    self.__arquivos.append(novo_arquivo)
-                    self.__cota -= tamanho
-                    self.usuario.log.incluir_log(f'Arquivo {nome_arquivo} Adicionado')
-                    return 'Arquivo adicionado ao diretório!', 1
+                    while True:
+                        copia = 1
+                        for i in self.__arquivos:
+                            if i.nome == nome_arquivo:
+                                nome = nome_arquivo.split('.')[0]
+                                ext = nome_arquivo.split('.')[1]
+                                copia += 1
+                        else:
+                            nome_diretorio = os.path.dirname(self.__path)
+                            arquivo = open(nome_diretorio + '\\' + str(usuario.cpf) + '\\' + nome_arquivo, "a")
+                            path_colar = Path(nome_diretorio + '\\' + str(usuario.cpf) + '\\' + nome_arquivo)
+                            arquivo.close()
+                            shutil.copyfile(path_origem, path_colar)
+                            data = datetime.today().strftime('%Y-%m-%d %H:%M')
+                            novo_arquivo = Arquivo(nome_arquivo, tamanho, data, path_colar)
+                            self.__arquivos.append(novo_arquivo)
+                            self.__cota -= tamanho
+                            self.usuario.log.incluir_log(f'Arquivo {nome_arquivo} Adicionado')
+                            copia = 1
+                        return 'Arquivo adicionado ao diretório!', 1
         except FileNotFoundError:
             return 'Verifique o caminho do arquivo, arquivo não encontrado!', 1
         except PermissionError:

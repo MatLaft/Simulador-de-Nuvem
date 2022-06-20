@@ -7,7 +7,7 @@ from Controller.ctrlServidor import *
 
 class CtrlConta:
     def __init__(self):
-        self.__contas = {}
+        self.__contas = {123:Admin('Adm',1,'adm','adm','1','ADM'),}
         self.__tela = TelaConta()
 
     @property
@@ -33,11 +33,11 @@ class CtrlConta:
         if isinstance(nome, str) and isinstance(cpf, int) and isinstance(email, str) and isinstance(senha, str) \
                 and isinstance(empresa, str) and cpf not in self.__contas.keys():
             diretorio = str(cpf)
-            if opcao == 2:
+            if opcao == '2':
                 usuario = Usuario(nome, cpf, email, senha, diretorio, empresa)
                 self.__contas[usuario.cpf] = usuario
                 return usuario
-            elif opcao == 1:
+            elif opcao == '1':
                 adm = Admin(nome, cpf, email, senha, diretorio, empresa)
                 self.__contas[adm.cpf] = adm
                 return adm
