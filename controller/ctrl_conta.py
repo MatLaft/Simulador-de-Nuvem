@@ -9,10 +9,6 @@ class CtrlConta:
         self.__tela_conta = TelaConta()
 
     @property
-    def tela_conta(self):
-        return self.__tela_conta
-
-    @property
     def contas(self):
         return list(self.__contas.values())
 
