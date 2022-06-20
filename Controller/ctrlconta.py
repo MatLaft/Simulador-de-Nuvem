@@ -1,8 +1,6 @@
-from Entities.usuario import *
 from View.telaconta import *
 from Entities.admin import *
 from Controller.ctrlDiretorio import *
-from Controller.ctrlServidor import *
 
 
 class CtrlConta:

@@ -40,7 +40,6 @@ class Sistema:
                 novo_servidor.diretorios.append(novo_diretorio)
 
     def menu(self):
-        # implementar diretorio e cota
         self.menu_inical()
         while self.__usuario_ativo:
             opcao = self.__tela_sistema.tela_menu()

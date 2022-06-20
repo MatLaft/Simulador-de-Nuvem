@@ -44,7 +44,7 @@ class Diretorio:
                 else:
                     tamanho = int(tamanho//1024)
                 if self.__cota - tamanho < 0:
-                    return 'Arquivo muito grande, verifique sua cota!'
+                    return 'Arquivo muito grande, verifique sua cota!', 1
                 else:
                     self.__cota -= tamanho
                     nome_diretorio = os.path.dirname(self.__path)
@@ -55,13 +55,13 @@ class Diretorio:
                     data = datetime.today().strftime('%Y-%m-%d %H:%M')
                     novo_arquivo = Arquivo(nome_arquivo, tamanho, data, path_colar)
                     self.__arquivos.append(novo_arquivo)
-                    return 'Arquivo adicionado ao diretório!'
+                    return 'Arquivo adicionado ao diretório!', 1
         except FileNotFoundError:
-            return 'Verifique o caminho do arquivo, arquivo não encontrado!'
+            return 'Verifique o caminho do arquivo, arquivo não encontrado!', 1
         except PermissionError:
-            return 'Digite um caminho válido!'
+            return 'Digite um caminho válido!', 1
         except Exception:
-            return 'Algo deu errado, tente novamente!'
+            return 'Algo deu errado, tente novamente!', 1
 
     def excluir_arquivo(self, arquivo: int):
         if isinstance(arquivo, int):
