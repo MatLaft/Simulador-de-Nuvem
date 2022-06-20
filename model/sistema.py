@@ -82,7 +82,3 @@ class Sistema:
                 elif opcao == 3:
                     logs = self.log.log
                     self.log.tela_log.print_logs(logs)
-
-if __name__ == '__main__':
-    Sistema().menu()
-
