@@ -59,7 +59,7 @@ class Sistema:
                 if opcao == 0:
                     self.usuario_ativo.log.incluir_log('Saiu do sistema')
                     for i in self.usuario_ativo.log.log:
-                        self.log.incluir_log(f'##{self.usuario_ativo.empresa}/{self.usuario_ativo.cpf}## {i}')
+                        self.log.incluir_log(f'{i}', self.__usuario_ativo, 'Sistema')
                     self.__usuario_ativo = None
                     self.menu_inical()
                 elif opcao == 1:
@@ -72,7 +72,7 @@ class Sistema:
                     self.usuario_ativo.log.incluir_log('Saiu do sistema')
                     for i in self.usuario_ativo.log.log:
                         if i not in self.log.log:
-                            self.log.log.append(f'##{self.usuario_ativo.empresa}/{self.usuario_ativo.cpf}## {i}')
+                            self.log.incluir_log(f'{i}',self.usuario_ativo,'Sistema')
                     self.__usuario_ativo = None
                     self.menu_inical()
                 elif opcao == 1:
