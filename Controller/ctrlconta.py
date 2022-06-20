@@ -42,19 +42,6 @@ class CtrlConta:
                 self.__contas[adm.cpf] = adm
                 return adm
 
-    def selecionar_conta(self):
-        conta_selecionada = self.__tela.tela_escolher_conta(self.relacao_cpf_nome())
-        while type(conta_selecionada) == str:
-            try:
-                return self.__contas[int(conta_selecionada)]
-            except ValueError:
-                print('Digite um CPF valido')
-                conta_selecionada = self.__tela.tela_escolher_conta(self.relacao_cpf_nome())
-
-            except KeyError:
-                print(f'CPF nao cadastrado!')
-                conta_selecionada = self.__tela.tela_escolher_conta(self.relacao_cpf_nome())
-
     def alterar_conta(self, conta):
         conta_selecionada = conta
         opcao = self.__tela.tela_alterar_conta()

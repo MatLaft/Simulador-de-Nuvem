@@ -18,10 +18,10 @@ class TelaConta:
 
     def tela_alterar_conta(self):
         print('Deseja alterar algum dado?')
-        escolha = input('S para sim, N para nao: ').lower()
-        if escolha == 'n':
+        escolha = input('1 - para sim\n2 - para nao: ').lower()
+        if escolha == '2':
             return
-        elif escolha == 's':
+        elif escolha == '1':
             print('Selecione o que deseja alterar!')
             opcoes = '1 - nome   2 - email   3 - senha  0 - retornar'
             print(opcoes)

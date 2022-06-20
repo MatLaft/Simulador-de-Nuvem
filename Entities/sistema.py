@@ -60,7 +60,7 @@ class Sistema:
                     self.usuario_ativo.log.incluir_log('Saiu do sistema')
                     for i in self.usuario_ativo.log.log:
                         if i not in self.log.log:
-                            self.log.log.append(f'({self.usuario_ativo.empresa}/{self.usuario_ativo.cpf}) {i}')
+                            self.log.log.append(f'##{self.usuario_ativo.empresa}/{self.usuario_ativo.cpf}## {i}')
                     self.__usuario_ativo = None
                     self.menu_inical()
                 elif opcao == 1:
@@ -73,7 +73,7 @@ class Sistema:
                     self.usuario_ativo.log.incluir_log('Saiu do sistema')
                     for i in self.usuario_ativo.log.log:
                         if i not in self.log.log:
-                            self.log.log.append(f'({self.usuario_ativo.empresa}/{self.usuario_ativo.cpf}) {i}')
+                            self.log.log.append(f'##{self.usuario_ativo.empresa}/{self.usuario_ativo.cpf}## {i}')
                     self.__usuario_ativo = None
                     self.menu_inical()
                 elif opcao == 1:
@@ -109,9 +109,9 @@ class Sistema:
 
 oi = Sistema()
 oi.menu()
-# for i in oi.log.log:
-#     print(i)
+for i in oi.log.log:
+    print(i)
 # print(oi._Sistema__controlador_servidor.nome_empresas)
 # # for i in oi._Sistema__controlador_conta.contas:
 # #     print(i.log.log)
-#C:\\Users\\mathe\\Desktop\\Untitled Diagram.drawio.png
+#C:\\Users\\mathe\\Desktop\\Telas_Matheus_Eduardo.pdf

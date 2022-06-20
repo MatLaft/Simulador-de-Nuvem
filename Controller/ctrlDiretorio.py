@@ -2,6 +2,7 @@ from Entities.diretorio import Diretorio, Usuario, Path
 import os
 from Entities.servidor import Servidor
 from View.telaDiretorio import *
+from Entities.conta import Conta
 
 
 class CtrlDiretorio:
@@ -18,7 +19,7 @@ class CtrlDiretorio:
         return self.__tela_diretorio
 
     def adicionar_diretorio(self, servidor: Servidor, usuario: Usuario):
-        if isinstance(servidor, Servidor) and isinstance(usuario, Usuario):
+        if isinstance(servidor, Servidor) and isinstance(usuario, Conta):
             nome_servidor = os.path.dirname(servidor.endereco)
             path_dir = Path(nome_servidor + "\\" + usuario.empresa + "\\" + str(usuario.cpf))
             path_dir.mkdir(parents=True, exist_ok=True)
