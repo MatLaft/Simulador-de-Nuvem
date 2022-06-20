@@ -45,12 +45,11 @@ class Diretorio:
                     copia = 1
                     while True:
                         nome = nome_arquivo.split('.')
-                        aux = nome_arquivo
                         for arquivo in self.__arquivos:
                             if arquivo.nome == nome_arquivo:
-                                nome[-2] += f' ({copia})'
+                                nome[-2] += f'({copia})'
                                 nome_arquivo = '.'.join(nome)
-                                nome_arquivo = nome_arquivo.replace(f' ({copia-1})', '')
+                                nome_arquivo = nome_arquivo.replace(f'({copia-1})', '')
                                 copia += 1
                                 break
                         else:

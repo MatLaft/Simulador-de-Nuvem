@@ -42,11 +42,11 @@ class Sistema:
             elif opcao == 2:
                 novo_usuario = self.__controlador_conta.cadastrar_conta()
                 if isinstance(novo_usuario, Usuario):
-                    self.log.incluir_log(f'Usuario Cadastrado')
+                    self.log.incluir_log(f'Usuario Cadastrado {novo_usuario.cpf}')
                 elif isinstance(novo_usuario, Admin):
-                    self.log.incluir_log(f'Administrador Cadastrado')
+                    self.log.incluir_log(f'Administrador Cadastrado {novo_usuario.cpf}')
                 novo_servidor = self.__controlador_servidor.adicionar_servidor(novo_usuario.empresa)
-                self.log.incluir_log('Servidor criado')
+                self.log.incluir_log(f'Servidor criado {novo_usuario.empresa}')
                 novo_diretorio = self.__controlador_diretorio.adicionar_diretorio(novo_servidor, novo_usuario)
                 novo_servidor.diretorios.append(novo_diretorio)
                 self.log.incluir_log(f'Diretório {novo_usuario.cpf} adicionado')
@@ -81,4 +81,6 @@ class Sistema:
                     self.__controlador_conta.ver_dados(self.__usuario_ativo)
                 elif opcao == 3:
                     logs = self.log.log
+                    for i in self.usuario_ativo.log.log:
+                        self.log.incluir_log(f'{i}', self.__usuario_ativo, 'Sistema')
                     self.log.tela_log.print_logs(logs)

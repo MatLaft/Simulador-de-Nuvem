@@ -38,20 +38,21 @@ class TelaDiretorio:
 
     def tela_enviar_arquivo(self):
         print("\n==========ENVIAR ARQUIVO==========")
-        print("Digite o caminho do arquivo ex: C:\\\\diretorio\\\\arquivo.extensão \nDigite ""0"" para cancelar")
+        print("Digite o caminho do arquivo ex: C:\\\\diretorio\\\\arquivo.extensão \n\nDigite ""0"" para voltar")
         path = input("Caminho: ")
         print()
         return path
 
     def tela_excluir_arquivo(self, lista_arquivos: []):
         print("\n==========EXCLUIR ARQUIVO==========")
-        print("Escolha o arquivo a ser excluído: \nDigite ""0"" para cancelar")
+        print("Escolha o arquivo a ser excluído:")
         if len(lista_arquivos) == 0:
             print("Não há arquivos para excluir! \n")
             return None
         else:
             for index, arquivo in enumerate(lista_arquivos):
                 print(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
+            print("Digite ""0"" para voltar ")
             arquivo = input("Arquivo: ")
             while type(arquivo) != int:
                 try:

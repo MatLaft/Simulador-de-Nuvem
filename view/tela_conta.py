@@ -4,18 +4,6 @@ class TelaConta:
     def __init__(self):
         pass
 
-    def tela_contas(self, contas: list):
-        print('Contas Cadastradas (Nome: CPF)')
-        print('//', end='')
-        for index, value in enumerate(contas):
-            print(f'{value["nome"]}:{value["cpf"]}', end='//')
-        print()
-
-    def tela_escolher_conta(self, contas: list) -> str:
-        self.tela_contas(contas)
-        conta_selecionada = input("Selecione a conta que deseja pelo CPF: ")
-        return conta_selecionada
-
     def tela_alterar_conta(self):
         print('Deseja alterar algum dado?')
         escolha = input('1 - para sim\n2 - para não\nOpção: ').lower()
@@ -144,4 +132,5 @@ class TelaConta:
         return nome, cpf, empresa, email, senha1, opcao
 
     def tela_ver_dados(self, nome, cpf, email, empresa):
+        print('\n==========DADOS USUÁRIO==========')
         print(f'Nome: {nome}\nCPF: {cpf}\nEmail: {email}\nEmpresa: {empresa}')

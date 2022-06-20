@@ -6,14 +6,14 @@ class TelaSistema:
 
     def tela_login(self, opcao=None):
         if opcao == 1:
-            print('Login feito!\n')
+            print('Login feito!')
         else:
             retorno = input('Digite 0 para voltar ao menu ou ENTER para tentar novamente: ')
             return retorno
 
     def tela_menu_inicial(self):
         print("\n==========SISTEMA DE ARQUIVOS==========")
-        print('1 - Logar\n2 - Cadastrar Usuário\n0 - Fechar')
+        print('1 - Logar\n2 - Cadastrar Usuário\n\n0 - Fechar')
         opcao = input('Opção: ')
         while type(opcao) == str:
             try:
@@ -23,7 +23,7 @@ class TelaSistema:
                 return opcao
             except ValueError:
                 print('###Entrada Invalida!Digite um numero entre 0 e 2!###')  # ALTERAR NO FUTURO CONFORME ADICIONAR OPCAO
-                print('1 - Logar\n2 - Cadastrar Usuário\n0 - Fechar')
+                print('1 - Logar\n2 - Cadastrar Usuário\n\n0 - Fechar')
                 opcao = input('Opção: ')
 
     def tela_menu(self):
@@ -65,5 +65,5 @@ class TelaSistema:
             except IndexError:
                 print(
                     '###Entrada Invalida!Digite um numero entre 0 e 3!###')  # ALTERAR NO FUTURO CONFORME ADICIONAR OPCAO
-                print('1 - Diretorio \n2 - Ver dados de Usuario\n3 - Ver logs do sistema \n4 - Servidores \n0 - Deslogar')
+                print('1 - Diretorio \n2 - Ver dados de Usuario\n3 - Ver logs do sistema \n4 - Servidores \n\n0 - Deslogar')
                 opcao = input('Opção: ')
