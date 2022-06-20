@@ -22,7 +22,6 @@ class CtrlServidor:
             novo_servidor = Servidor(empresa, endereco_servidor)
             self.__servidores.append(novo_servidor)
             self.__nome_empresas.append(empresa)
-            novo_servidor.log.incluir_log('Servidor criado')
             return novo_servidor
         else:
             return self.__servidores[self.__nome_empresas.index(empresa)]
