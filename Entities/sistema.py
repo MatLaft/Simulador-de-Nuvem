@@ -85,33 +85,17 @@ class Sistema:
                     self.log.tela_log.print_logs(logs)
 
 
+# if __name__ == "__main__":
+# Sistema().menu()
+# C:\\Users\\jv_dj\\Desktop\\teste.py
+# C:\\Users\\jv_dj\\Desktop\\jv\\VIAGEM.png
+# C:\\Users\\jv_dj\\Downloads\\thonny-3.3.13.exe
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#if __name__ == "__main__":
-    #Sistema().menu()
-#C:\\Users\\jv_dj\\Desktop\\teste.py
-#C:\\Users\\jv_dj\\Desktop\\jv\\VIAGEM.png
-#C:\\Users\\jv_dj\\Downloads\\thonny-3.3.13.exe
-
-oi = Sistema()
-oi.menu()
-for i in oi.log.log:
-    print(i)
+# oi = Sistema()
+# oi.menu()
+# for i in oi.log.log:
+#     print(i)
 # print(oi._Sistema__controlador_servidor.nome_empresas)
 # # for i in oi._Sistema__controlador_conta.contas:
 # #     print(i.log.log)
-#C:\\Users\\mathe\\Desktop\\Telas_Matheus_Eduardo.pdf
+# C:\\Users\\mathe\\Desktop\\Telas_Matheus_Eduardo.pdf

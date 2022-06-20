@@ -95,8 +95,11 @@ class TelaConta:
 
     def tela_cadastro(self,cpfs):
         print("Realizar cadastro de um usuário!")
-        opcao = input('1 - Admnistrador 2 - Usuario\n Opcao: ')
+        opcao = input('1 - Administrador 2 - Usuário\n Opção: ')
         nome = input('Nome: ')
+        while nome == '':
+            print('Entrada de nome obrigatória')
+            nome = input('Nome: ')
         cpf = input('CPF: ')
         while type(cpf) == str:
             try:
@@ -107,13 +110,25 @@ class TelaConta:
                 print('CPF invalido ou ja cadastrado! Digite novamente')
                 cpf = input('CPF: ')
         empresa = input('Empresa: ')
+        while empresa == '':
+            print('Entrada de empresa obrigatória')
+            empresa = input('Empresa: ')
         email = input('Email: ')
+        while email == '':
+            print('Entrada de email obrigatória')
+            email = input('Email: ')
         senha1 = input('Senha: ')
+        while senha1 == '':
+            print('Entrada de senha obrigatória')
+            senha1 = input('senha: ')
         senha2 = input('Digite a senha novamente: ')
         while senha1 != senha2:
             print('Senha digitada pela segunda vez foi diferente da primera')
             print('Digite novamente!')
             senha1 = input('Senha: ')
+            while senha1 == '':
+                print('Entrada de senha obrigatória')
+                senha1 = input('senha: ')
             senha2 = input('Digite a senha novamente: ')
         return nome, cpf, empresa, email, senha1, opcao
 
