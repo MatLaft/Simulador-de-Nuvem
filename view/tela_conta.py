@@ -1,37 +1,40 @@
-
+import PySimpleGUI as sg
+from testetelas import ExemploView
 
 class TelaConta:
     def __init__(self):
-        pass
+        self.tela = ExemploView()
 
     def tela_alterar_conta(self):
-        print('Deseja alterar algum dado?')
-        escolha = input('1 - para sim\n2 - para não\nOpção: ').lower()
-        if escolha == '2':
-            return
-        elif escolha == '1':
-            print('\nSelecione o que deseja alterar!')
-            opcoes = '1 - nome   2 - email   3 - senha  0 - retornar'
-            print(opcoes)
-            op = input('Opção: ')
-            while type(op) == str:
-                try:
-                    if 0 <= int(op) <= 3:
-                        op = int(op)
-                        return op
-                    else:
-                        raise IndexError
-                except ValueError:
-                    print('\nERRO!!Digite um número!!')
-                    print(opcoes)
-                    op = input('Opção: ')
-                except IndexError:
-                    print(opcoes)
-                    print('\nERRO!!Número digitado deve estar entre 1 e 3!!')
-                    print(opcoes)
-                    op = input('Opção: ')
-        else:
-            print('\nEscolha inválida')
+        # print('Deseja alterar algum dado?')
+        # escolha = input('1 - para sim\n2 - para não\nOpção: ').lower()
+            # print('\nSelecione o que deseja alterar!')
+            # opcoes = '1 - nome   2 - email   3 - senha  0 - retornar'
+            # print(opcoes)
+            # op = input('Opção: ')
+        self.tela.botoestela(['Retornar', 'Nome', 'Email', 'Senha'],
+                             'SISTEMA DE ARQUIVOS',
+                             [[sg.Text('Selecione o que deseja alterar!')]]
+                             )
+        op = str(self.tela.open()[0])
+        self.tela.close()
+        return op
+            # while type(op) == str:
+            #     try:
+            #         if 0 <= int(op) <= 3:
+            #             op = int(op)
+            #             return op
+            #         else:
+            #             raise IndexError
+            #     except ValueError:
+            #         print('\nERRO!!Digite um número!!')
+            #         print(opcoes)
+            #         op = input('Opção: ')
+            #     except IndexError:
+            #         print(opcoes)
+            #         print('\nERRO!!Número digitado deve estar entre 1 e 3!!')
+            #         print(opcoes)
+            #         op = input('Opção: ')
 
     def tela_alterar_senha(self):
         primeira = input('Digite uma nova senha: ')
@@ -132,5 +135,17 @@ class TelaConta:
         return nome, cpf, empresa, email, senha1, opcao
 
     def tela_ver_dados(self, nome, cpf, email, empresa):
-        print('\n==========DADOS USUÁRIO==========')
-        print(f'Nome: {nome}\nCPF: {cpf}\nEmail: {email}\nEmpresa: {empresa}')
+        # print('\n==========DADOS USUÁRIO==========')
+        # print(f'Nome: {nome}\nCPF: {cpf}\nEmail: {email}\nEmpresa: {empresa}')
+        self.tela.botoestela(['NAO','SIM'],
+                             'SISTEMA DE ARQUIVOS',
+                             [[sg.Text(f'Nome: {nome}')],
+                              [sg.Text(f'CPF: {cpf}')],
+                              [sg.Text(f'Email: {email}')],
+                              [sg.Text(f'Empresa: {empresa}')],
+                              [sg.Text('DESEJA ALTERAR ALGUM DADO DA CONTA?')]
+                              ]
+                             )
+        op = str(self.tela.open()[0])
+        self.tela.close()
+        return op

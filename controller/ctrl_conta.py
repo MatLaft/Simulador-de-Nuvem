@@ -34,7 +34,7 @@ class CtrlConta:
 
     def alterar_conta(self, conta):
         conta_selecionada = conta
-        opcao = self.__tela_conta.tela_alterar_conta()
+        opcao = int(self.__tela_conta.tela_alterar_conta())
         if opcao == 1:
             conta_selecionada.nome = self.__tela_conta.tela_alterar_nome()
             conta_selecionada.log.incluir_log('Nome alterado')
@@ -58,6 +58,8 @@ class CtrlConta:
             return
 
     def ver_dados(self, conta):
-        nome, cpf, email, empresa = conta.nome, conta.cpf, conta.email, conta.empresa
-        self.__tela_conta.tela_ver_dados(nome, cpf, email, empresa)
-        self.alterar_conta(conta)
+        nome, cpf, email, empresa = conta.nome, conta.cpf, conta.email, \
+                                    conta.empresa
+        x = self.__tela_conta.tela_ver_dados(nome, cpf, email, empresa)
+        if x == '1':
+            self.alterar_conta(conta)
