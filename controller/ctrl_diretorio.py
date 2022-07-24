@@ -9,7 +9,7 @@ from DAO.diretorio_dao import DiretorioDao
 class CtrlDiretorio:
     def __init__(self):
         self.__tela_diretorio = TelaDiretorio()
-        self.__diretorio_dao = DiretorioDao()
+        self.__diretorios = {}
 
     @property
     def diretorios(self):

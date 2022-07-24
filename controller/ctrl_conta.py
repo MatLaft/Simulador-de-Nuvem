@@ -1,20 +1,21 @@
 from view.tela_conta import *
 from model.admin import *
 from controller.ctrl_diretorio import *
+from DAO.contaDAO import ContaDAO
 
 
 class CtrlConta:
     def __init__(self):
-        self.__contas = {}
+        self.__contas = ContaDAO()
         self.__tela_conta = TelaConta()
 
     @property
     def contas(self):
-        return list(self.__contas.values())
+        return self.__contas.cache
 
     def relacao_cpf_nome(self):
         dados_tela = []
-        for conta in self.__contas.values():
+        for conta in self.contas.values():
             dados_tela.append({'nome': conta.nome, 'cpf': conta.cpf})
         return dados_tela
 
@@ -23,22 +24,24 @@ class CtrlConta:
         if opcao == '0' or opcao == '':
             return None
         nome, cpf, empresa, email, senha = \
-            self.__tela_conta.tela_cadastro(self.__contas.keys())
+            self.__tela_conta.tela_cadastro(self.contas.keys())
         if (nome is None and cpf is None
                 and empresa is None and email is None and senha is None):
             return None
         if isinstance(nome, str) and isinstance(cpf, int) and\
                 isinstance(email, str) and isinstance(senha, str) \
                 and isinstance(empresa, str) and \
-                cpf not in self.__contas.keys():
+                cpf not in self.contas.keys():
             diretorio = str(cpf)
             if opcao == '1':
                 usuario = Usuario(nome, cpf, email, senha, diretorio, empresa)
-                self.__contas[usuario.cpf] = usuario
+                self.contas[usuario.cpf] = usuario
+                self.__contas.add(usuario)
                 return usuario
             elif opcao == '2':
                 adm = Admin(nome, cpf, email, senha, diretorio, empresa)
-                self.__contas[adm.cpf] = adm
+                self.contas[adm.cpf] = adm
+                self.__contas.add(adm)
                 return adm
 
     def alterar_conta(self, conta):
@@ -50,18 +53,21 @@ class CtrlConta:
                 return
             conta_selecionada.nome = novo_nome
             conta_selecionada.log.incluir_log('Nome alterado')
+            self.__contas.update()
         elif opcao == 2:
             novo_email = self.__tela_conta.tela_alterar_email()
             if novo_email is None or novo_email == '0':
                 return
             conta_selecionada.email = novo_email
             conta_selecionada.log.incluir_log('Email alterado')
+            self.__contas.update()
         elif opcao == 3:
             novo_senha = self.__tela_conta.tela_alterar_senha()
             if novo_senha is None or novo_senha == '0':
                 return
             conta_selecionada.senha = novo_senha
             conta_selecionada.log.incluir_log('Senha alterada')
+            self.__contas.update()
         elif opcao == 0:
             return
 
@@ -70,7 +76,7 @@ class CtrlConta:
             cpf, senha = self.__tela_conta.tela_login(1)
             if cpf is None and senha is None:
                 return None
-            for i in self.__contas.values():
+            for i in self.contas.values():
                 if i.cpf == cpf and i.senha == senha:
                     i.log.incluir_log('Entrou no sistema')
                     return i

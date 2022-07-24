@@ -1,5 +1,6 @@
 from datetime import datetime
 from view.tela_logs import TelaLog
+from DAO.logDAO import LogDAO
 
 class Log:
     def __init__(self):
@@ -23,5 +24,5 @@ class Log:
             if string not in self.__log_rep:
                 self.__log.append(log)
                 self.__log_rep.append(string)
-        elif string not in self.__log:
-            self.__log.append(datetime.now().strftime('%d/%m/%Y %H:%M:%S  :  ') + string)
+        elif string not in self.log:
+            self.log.append(datetime.now().strftime('%d/%m/%Y %H:%M:%S  :  ') + string)
