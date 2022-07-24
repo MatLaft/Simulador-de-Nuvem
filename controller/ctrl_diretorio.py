@@ -3,12 +3,13 @@ import os
 from model.servidor import Servidor
 from view.tela_diretorio import *
 from model.conta import Conta
+from DAO.diretorio_dao import DiretorioDao
 
 
 class CtrlDiretorio:
     def __init__(self):
         self.__tela_diretorio = TelaDiretorio()
-        self.__diretorios = {}
+        self.__diretorio_dao = DiretorioDao()
 
     @property
     def diretorios(self):
