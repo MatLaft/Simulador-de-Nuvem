@@ -44,7 +44,7 @@ class TelaDiretorio:
                   [sg.Listbox(values=lista_concatenada,
                               select_mode='single', key='fac',
                               size=(100, 8))],
-                   [sg.Button('Voltar', font=('Times New Roman', 12))]]
+                  [sg.Button('Voltar', font=('Times New Roman', 12))]]
 
         self.__window = sg.Window('Meus Arquivos').Layout(layout)
         event, value = self.__window.Read()
