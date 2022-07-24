@@ -1,7 +1,7 @@
 from view.tela_conta import *
 from model.admin import *
 from controller.ctrl_diretorio import *
-from DAO.contaDAO import ContaDAO
+from dao.contaDAO import ContaDAO
 
 
 class CtrlConta:

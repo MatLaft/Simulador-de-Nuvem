@@ -1,15 +1,16 @@
 from model.servidor import Servidor
 from pathlib import Path
+from dao.servidor_dao import ServidorDao
 
 
 class CtrlServidor:
     def __init__(self):
-        self.__servidores = list()
+        self.__servidor_dao = ServidorDao()
         self.__nome_empresas = list()
 
     @property
     def servidores(self):
-        return self.__servidores
+        return self.__servidor_dao.get_all()
 
     @property
     def nome_empresas(self):
@@ -20,8 +21,8 @@ class CtrlServidor:
             endereco_servidor = Path("C:\Trabalho1\Servidores\\" + empresa)
             endereco_servidor.mkdir(parents=True, exist_ok=True)
             novo_servidor = Servidor(empresa, endereco_servidor)
-            self.__servidores.append(novo_servidor)
+            self.__servidor_dao.add(novo_servidor)
             self.__nome_empresas.append(empresa)
             return novo_servidor
         else:
-            return self.__servidores[self.__nome_empresas.index(empresa)]
+            return self.__servidor_dao.get([self.__nome_empresas.index(empresa)])

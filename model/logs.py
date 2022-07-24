@@ -1,6 +1,6 @@
 from datetime import datetime
 from view.tela_logs import TelaLog
-from DAO.logDAO import LogDAO
+from dao.logDAO import LogDAO
 
 class Log:
     def __init__(self):
