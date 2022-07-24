@@ -69,16 +69,22 @@ class TelaDiretorio:
             return str(0)
 
     def tela_excluir_arquivo(self, lista_arquivos: []):
-        lista_concatenada = []
-        for index, arquivo in enumerate(lista_arquivos):
-            lista_concatenada.append(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
-        layout = [[sg.Text('Escolha o arquivo a ser excluído', size=(30, 1),
-                             font='Lucida', justification='left')],
-                  [sg.Listbox(values=lista_concatenada,
-                                select_mode='single', key='fac',
-                                size=(100, 8), )],
-                  [sg.Button('Excluir', font=('Times New Roman', 12)),
-                   sg.Button('Voltar', font=('Times New Roman', 12))]]
+        if len(lista_arquivos) == 0:
+            layout = [
+                [sg.Text('Não há arquivos para excluir', size=(30, 1),
+                         font='Lucida', justification='left')],
+                 [sg.Button('Voltar', font=('Times New Roman', 12))]]
+        else:
+            lista_concatenada = []
+            for index, arquivo in enumerate(lista_arquivos):
+                lista_concatenada.append(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
+            layout = [[sg.Text('Escolha o arquivo a ser excluído', size=(30, 1),
+                                 font='Lucida', justification='left')],
+                      [sg.Listbox(values=lista_concatenada,
+                                    select_mode='single', key='fac',
+                                    size=(100, 8), )],
+                      [sg.Button('Excluir', font=('Times New Roman', 12)),
+                       sg.Button('Voltar', font=('Times New Roman', 12))]]
 
         self.__window = sg.Window('Excluir Arquivo').Layout(layout)
         event, value = self.__window.Read()
