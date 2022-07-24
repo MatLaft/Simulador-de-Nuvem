@@ -1,80 +1,107 @@
+import PySimpleGUI as sg
 
 
 class TelaDiretorio:
     def __init__(self):
-        pass
+        self.__window = None
 
     def tela_principal_diretorio(self):
-        print("\n==========MEU DIRETÓRIO==========")
-        print("1 - Ver arquivos")
-        print("2 - Adicionar arquivo")
-        print("3 - Excluir arquivo")
-        print("4 - Ver Cota de armazenamento")
-        print("\n0 - Voltar")
-        opcao = input("Opção: ")
-        while type(opcao) != int:
-            try:
-                opcao = int(opcao)
-                if 0 <= opcao <= 4:
-                    break
-                else:
-                    raise IndexError
-            except ValueError:
-                print("Digite um número!")
-                opcao = input("Opção: ")
-            except IndexError:
-                print("Digite um número entre 0 e 4!")
-                opcao = input("Opção: ")
-        return opcao
+        layout = [
+            [sg.Button('Ver arquivos', button_color=('white', '#001480')),
+             sg.Button('Adicionar arquivo', button_color=('white', '#007339')),
+             sg.Button('Excluir arquivo', button_color=('white', '#007339')),
+             sg.Button('Ver Cota de armazenamento',
+                       button_color=('white', '#007339')),
+             sg.Button('Voltar', button_color=('white', '#007339'))]]
+
+        self.__window = sg.Window('MEU DIRETORIO').Layout(layout)
+
+        event, values = self.__window.Read()
+        if event == 'Ver arquivos':
+            self.close()
+            return 1
+        if event == 'Adicionar arquivo':
+            self.close()
+            return 2
+        if event == 'Excluir arquivo':
+            self.close()
+            return 3
+        if event == 'Ver Cota de armazenamento':
+            self.close()
+            return 4
+        if event == 'Voltar':
+            self.close()
+            return 0
+
 
     def tela_ver_arquivos(self, lista_arquivos: []):
-        print("\n==========LISTA DE ARQUIVOS==========")
-        if len(lista_arquivos) == 0:
-            print("Não há arquivos no diretório!\n")
-            return None
-        else:
-            for index, arquivo in enumerate(lista_arquivos):
-                print(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
+        lista_concatenada = []
+        for index, arquivo in enumerate(lista_arquivos):
+            lista_concatenada.append(
+                f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
+        layout = [[sg.Text('Escolha o arquivo a ser excluído', size=(30, 1),
+                           font='Lucida', justification='left')],
+                  [sg.Listbox(values=lista_concatenada,
+                              select_mode='single', key='fac',
+                              size=(100, 8))],
+                   [sg.Button('Voltar', font=('Times New Roman', 12))]]
+
+        self.__window = sg.Window('Meus Arquivos').Layout(layout)
+        event, value = self.__window.Read()
+        if event == "Voltar":
+            self.close()
 
     def tela_enviar_arquivo(self):
-        print("\n==========ENVIAR ARQUIVO==========")
-        print("Digite o caminho do arquivo ex: C:\\\\diretorio\\\\arquivo.extensão \n\nDigite ""0"" para voltar")
-        path = input("Caminho: ")
-        return path
+        layout = [[sg.T("")],
+                  [sg.Text("Escolha um Arquivo: "),
+                   sg.InputText(key="path"), sg.FileBrowse()],
+                  [sg.Button("Enviar")],
+                  [sg.Button("Voltar")]]
+
+        self.__window = sg.Window('Busca de Arquivo', layout, size=(600, 150))
+        event, value = self.__window.Read()
+        if event == "Enviar":
+            arquivo_path = value["path"]
+            self.close()
+            return str(arquivo_path)
+        if event == "Voltar":
+            self.close()
+            return str(0)
 
     def tela_excluir_arquivo(self, lista_arquivos: []):
-        print("\n==========EXCLUIR ARQUIVO==========")
-        print("Escolha o arquivo a ser excluído:")
-        if len(lista_arquivos) == 0:
-            print("Não há arquivos para excluir! \n")
+        lista_concatenada = []
+        for index, arquivo in enumerate(lista_arquivos):
+            lista_concatenada.append(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
+        layout = [[sg.Text('Escolha o arquivo a ser excluído', size=(30, 1),
+                             font='Lucida', justification='left')],
+                  [sg.Listbox(values=lista_concatenada,
+                                select_mode='single', key='fac',
+                                size=(100, 8), )],
+                  [sg.Button('Excluir', font=('Times New Roman', 12)),
+                   sg.Button('Voltar', font=('Times New Roman', 12))]]
+
+        self.__window = sg.Window('Excluir Arquivo').Layout(layout)
+        event, value = self.__window.Read()
+        if event == "Excluir":
+            self.close()
+            return int(value['fac'][0][0]) - 1
+        if event == "Voltar":
+            self.close()
             return None
-        else:
-            for index, arquivo in enumerate(lista_arquivos):
-                print(f'{index + 1} - {arquivo[0]} {arquivo[1]} {arquivo[2]} KB')
-            print("Digite ""0"" para voltar\n")
-            arquivo = input("Arquivo: ")
-            while type(arquivo) != int:
-                try:
-                    arquivo = int(arquivo)
-                    if arquivo == 0:
-                        return None
-                    elif 1 <= arquivo <= len(lista_arquivos):
-                        break
-                    else:
-                        raise IndexError
-                except ValueError:
-                    print("Digite um número!")
-                    arquivo = input("Opção: ")
-                except IndexError:
-                    if len(lista_arquivos) == 1:
-                        print("Digite o número 1")
-                    else:
-                        print("Digite um número entre 1 e " + str(len(lista_arquivos)))
-                    arquivo = input("Opção: ")
-            return arquivo - 1
+
 
     def tela_cota(self, cota: int):
-        print(f"\nA cota restante é: {cota:.2f} KB")
+        self.mostra_mensagem(f"\nA cota restante é: {cota:.2f} KB")
 
     def tela_mensagem(self, mensagem: str):
-        print(mensagem)
+        self.mostra_mensagem(mensagem)
+
+    def mostra_mensagem(self, msg):
+        sg.popup("", msg)
+
+    def close(self):
+        self.__window.Close()
+
+    def open(self):
+        button, values = self.__window.Read()
+        return button, values
