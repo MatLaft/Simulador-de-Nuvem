@@ -15,7 +15,7 @@ import PySimpleGUI as sg
 # print(button,values)
 
 
-class ExemploView:
+class Tela:
     def __init__(self):
         self.__window = None
         self.__layout = None
@@ -29,10 +29,9 @@ class ExemploView:
         self.__window = sg.Window(f'{titulo}').layout(listabotoesprontos)
         self.__layout = botoes
 
-    def botoestelapersonalizado(self,listabotoesprontos,listanome,titulo):
+    def botoestelapersonalizado(self, listabotoesprontos,listanome,titulo):
         self.__window = sg.Window(f'{titulo}').layout(listabotoesprontos)
         self.__layout = listanome
-
 
     def open(self):
         button, values = self.__window.Read()
@@ -44,10 +43,29 @@ class ExemploView:
     def close(self):
         self.__window.Close()
 
-    def show_message(self,titulo: str, mensagem: str):
+    def show_message(self, titulo: str, mensagem: str):
         sg.Popup(titulo, mensagem)
 
-# oi = ExemploView()
-# oi.botoestela(['NAO','SIM'],'ALTERAR CONTA',[[sg.Text('Incluir novo cliente')]])
-# x = oi.open()[0]
+# oi = Tela()
+# oi.botoestela(['NAO','SIM'],'ALTERAR CONTA',[ [sg.Text('Nome', size=(15, 1)), sg.InputText('',key= 'Nome')]])
+# x = oi.open()[1]
 # print(x)
+# column1 = [
+#     [sg.Text(f'Scrollable{i}')] for i in range(10)
+# ]
+#
+# column2 = [
+#     [sg.Text(f'Static{i}')] for i in range(5)
+# ]
+#
+# layout = [
+#     [
+#         sg.Column(column1, scrollable=True,  vertical_scroll_only=True),
+#         sg.Column(column2)
+#     ]
+# ]
+#
+# window = sg.Window('Scrollable', layout)
+# event, values = window.read()
+# window.close()
+# sg.main_sdk_help()

@@ -23,14 +23,8 @@ class Sistema:
         return self.__log
 
     def logar(self):
-        while True:
-            self.__usuario_ativo = self.__controlador_conta.logar()
-            if self.usuario_ativo:
-                self.__tela_sistema.tela_login(1)
-                break
-            voltar = self.__tela_sistema.tela_login()
-            if voltar == '0':
-                break
+        self.__usuario_ativo = self.__controlador_conta.logar()
+
 
     def menu_inical(self):
         while self.__usuario_ativo is None:
@@ -41,24 +35,34 @@ class Sistema:
                 self.logar()
             elif opcao == '2':
                 novo_usuario = self.__controlador_conta.cadastrar_conta()
-                if isinstance(novo_usuario, Usuario):
+                if novo_usuario is None:
+                    pass
+                elif isinstance(novo_usuario, Usuario):
                     self.log.incluir_log(f'Usuario Cadastrado {novo_usuario.cpf}')
+                    novo_servidor = self.__controlador_servidor.adicionar_servidor(
+                        novo_usuario.empresa)
+                    self.log.incluir_log(
+                        f'Servidor {novo_usuario.empresa} criado ')
+                    novo_diretorio = self.__controlador_diretorio.adicionar_diretorio(
+                        novo_servidor, novo_usuario)
+                    novo_servidor.diretorios.append(novo_diretorio)
+                    self.log.incluir_log(
+                        f'Diretório {novo_usuario.cpf} adicionado')
                 elif isinstance(novo_usuario, Admin):
                     self.log.incluir_log(f'Administrador Cadastrado {novo_usuario.cpf}')
-                novo_servidor = self.__controlador_servidor.adicionar_servidor(novo_usuario.empresa)
-                self.log.incluir_log(f'Servidor {novo_usuario.empresa} criado ')
-                novo_diretorio = self.__controlador_diretorio.adicionar_diretorio(novo_servidor, novo_usuario)
-                novo_servidor.diretorios.append(novo_diretorio)
-                self.log.incluir_log(f'Diretório {novo_usuario.cpf} adicionado')
+                    novo_servidor = self.__controlador_servidor.adicionar_servidor(novo_usuario.empresa)
+                    self.log.incluir_log(f'Servidor {novo_usuario.empresa} criado ')
+                    novo_diretorio = self.__controlador_diretorio.adicionar_diretorio(novo_servidor, novo_usuario)
+                    novo_servidor.diretorios.append(novo_diretorio)
+                    self.log.incluir_log(f'Diretório {novo_usuario.cpf} adicionado')
             elif opcao == '':
                 return
 
     def menu(self):
         self.menu_inical()
-        while self.__usuario_ativo:
+        while isinstance(self.__usuario_ativo, Conta):
             if isinstance(self.__usuario_ativo, Usuario):
                 opcao = (self.__tela_sistema.tela_menu())
-                print(opcao)
                 if opcao == '0':
                     self.usuario_ativo.log.incluir_log('Saiu do sistema')
                     for i in self.usuario_ativo.log.log:

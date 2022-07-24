@@ -19,15 +19,24 @@ class CtrlConta:
         return dados_tela
 
     def cadastrar_conta(self):
-        nome, cpf, empresa, email, senha, opcao = self.__tela_conta.tela_cadastro(self.__contas.keys())
-        if isinstance(nome, str) and isinstance(cpf, int) and isinstance(email, str) and isinstance(senha, str) \
-                and isinstance(empresa, str) and cpf not in self.__contas.keys():
+        opcao = self.__tela_conta.tela_admin_usuario()
+        if opcao == '0' or opcao == '':
+            return None
+        nome, cpf, empresa, email, senha = \
+            self.__tela_conta.tela_cadastro(self.__contas.keys())
+        if (nome is None and cpf is None
+                and empresa is None and email is None and senha is None):
+            return None
+        if isinstance(nome, str) and isinstance(cpf, int) and\
+                isinstance(email, str) and isinstance(senha, str) \
+                and isinstance(empresa, str) and \
+                cpf not in self.__contas.keys():
             diretorio = str(cpf)
-            if opcao == '2':
+            if opcao == '1':
                 usuario = Usuario(nome, cpf, email, senha, diretorio, empresa)
                 self.__contas[usuario.cpf] = usuario
                 return usuario
-            elif opcao == '1':
+            elif opcao == '2':
                 adm = Admin(nome, cpf, email, senha, diretorio, empresa)
                 self.__contas[adm.cpf] = adm
                 return adm
@@ -36,26 +45,37 @@ class CtrlConta:
         conta_selecionada = conta
         opcao = int(self.__tela_conta.tela_alterar_conta())
         if opcao == 1:
-            conta_selecionada.nome = self.__tela_conta.tela_alterar_nome()
+            novo_nome = self.__tela_conta.tela_alterar_nome()
+            if novo_nome is None or novo_nome == '0':
+                return
+            conta_selecionada.nome = novo_nome
             conta_selecionada.log.incluir_log('Nome alterado')
         elif opcao == 2:
-            conta_selecionada.email = self.__tela_conta.tela_alterar_email()
+            novo_email = self.__tela_conta.tela_alterar_email()
+            if novo_email is None or novo_email == '0':
+                return
+            conta_selecionada.email = novo_email
             conta_selecionada.log.incluir_log('Email alterado')
         elif opcao == 3:
-            conta_selecionada.senha = self.__tela_conta.tela_alterar_senha()
+            novo_senha = self.__tela_conta.tela_alterar_senha()
+            if novo_senha is None or novo_senha == '0':
+                return
+            conta_selecionada.senha = novo_senha
             conta_selecionada.log.incluir_log('Senha alterada')
         elif opcao == 0:
             return
 
     def logar(self):
-        cpf, senha = self.__tela_conta.tela_login(1)
-        for i in self.__contas.values():
-            if i.cpf == cpf and i.senha == senha:
-                i.log.incluir_log('Entrou no sistema')
-                return i
-        else:
-            self.__tela_conta.tela_login()
-            return
+        while True:
+            cpf, senha = self.__tela_conta.tela_login(1)
+            if cpf is None and senha is None:
+                return None
+            for i in self.__contas.values():
+                if i.cpf == cpf and i.senha == senha:
+                    i.log.incluir_log('Entrou no sistema')
+                    return i
+            else:
+                self.__tela_conta.tela_login()
 
     def ver_dados(self, conta):
         nome, cpf, email, empresa = conta.nome, conta.cpf, conta.email, \
