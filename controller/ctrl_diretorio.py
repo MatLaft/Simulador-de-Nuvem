@@ -3,7 +3,7 @@ import os
 from model.servidor import Servidor
 from view.tela_diretorio import *
 from model.conta import Conta
-from dao.diretorio_dao import DiretorioDao
+from dao.diretoriodao import DiretorioDao
 
 
 class CtrlDiretorio:
