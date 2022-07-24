@@ -2,7 +2,7 @@ from controller.ctrl_conta import *
 from controller.ctrl_diretorio import *
 from controller.ctrl_servidor import *
 from view.tela_sistema import *
-from model.logs import Log
+from controller.ctrl_logs import Log
 
 
 class Sistema:

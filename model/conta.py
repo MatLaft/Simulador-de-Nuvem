@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from model.logs import Log
+from controller.ctrl_logs import Log
 
 
 class Conta(ABC):
