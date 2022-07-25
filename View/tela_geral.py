@@ -20,7 +20,7 @@ class Tela:
         self.__window = None
         self.__layout = None
 
-    def botoestela(self, botoes: list[''], titulo, botoeprontos: list = []):
+    def botoes_tela(self, botoes: list[''], titulo, botoeprontos: list = []):
         listabotoesprontos = botoeprontos
         listabotoes = []
         for i in botoes:
@@ -29,7 +29,7 @@ class Tela:
         self.__window = sg.Window(f'{titulo}').layout(listabotoesprontos)
         self.__layout = botoes
 
-    def botoestelapersonalizado(self, listabotoesprontos,listanome,titulo):
+    def botoes_tela_personalizado(self, listabotoesprontos, listanome, titulo):
         self.__window = sg.Window(f'{titulo}').layout(listabotoesprontos)
         self.__layout = listanome
 

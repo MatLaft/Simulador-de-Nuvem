@@ -1,6 +1,5 @@
 from datetime import datetime
 from dao.logDAO import LogDAO
-from view.tela_geral import Tela
 
 
 class Log:
