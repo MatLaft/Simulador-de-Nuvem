@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from view.tela_geral import Tela
+from Erros.cpf_duplicado_exception import CPFDuplicadoException
 
 
 class TelaConta:
@@ -215,11 +216,13 @@ class TelaConta:
             try:
                 cpf = int(cpf)
                 if cpf in cpfs:
-                    raise ValueError
+                    raise CPFDuplicadoException
             except ValueError:
                 self.tela.show_message('ERRO DE ENTRADA!',
-                                       'CPF inválido ou já cadastrado! Digite '
-                                       'novamente')
+                                       'CPF inválido!')
+            except CPFDuplicadoException:
+                self.tela.show_message('ERRO DE ENTRADA!',
+                                       'CPF já cadastrado!')
                 cpf = ''
             if empresa == '':
                 self.tela.show_message('ERRO DE ENTRADA!',
