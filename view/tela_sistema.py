@@ -42,7 +42,7 @@ class TelaSistema:
         self.tela.close()
         return opcao
 
-    def teste(self,lista):
+    def print_logs(self, lista):
         layout = [[sg.Text('Log do sistema', size=(30, 1),
                            font='Lucida', justification='left')],
                   [sg.Listbox(values=lista,
