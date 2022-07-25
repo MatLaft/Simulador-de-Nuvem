@@ -7,10 +7,10 @@ class TelaConta:
         self.tela = Tela()
 
     def tela_alterar_conta(self):
-        self.tela.botoestela(['Retornar', 'Nome', 'Email', 'Senha'],
+        self.tela.botoes_tela(['Retornar', 'Nome', 'Email', 'Senha'],
                              'SISTEMA DE ARQUIVOS',
-                             [[sg.Text('Selecione o que deseja alterar!')]]
-                             )
+                              [[sg.Text('Selecione o que deseja alterar!')]]
+                              )
         op = str(self.tela.open()[0])
         self.tela.close()
         return op
@@ -18,15 +18,15 @@ class TelaConta:
     def tela_alterar_senha(self):
         # primeira = input('Digite uma nova senha: ')
         # segunda = input('Digite a senha novamente: ')
-        self.tela.botoestela(['Retornar', 'Alterar Senha'],
+        self.tela.botoes_tela(['Retornar', 'Alterar Senha'],
                              'SISTEMA DE ARQUIVOS',
-                             [[sg.Text('Nova senha: ', size=(15, 1)),
+                              [[sg.Text('Nova senha: ', size=(15, 1)),
                                sg.InputText('', key='senha1',
                                             password_char='*')],
                               [sg.Text('Repetir nova senha', size=(15, 1)),
                                sg.InputText('', key='senha2',
                                             password_char='*')]]
-                             )
+                              )
 
         acesso = (self.tela.open())
         primeira = acesso[1]['senha1']
@@ -40,16 +40,16 @@ class TelaConta:
             else:
                 self.tela.show_message('ERRO DE ENTRADA!',
                                        'Senhas incoerentes!')
-                self.tela.botoestela(['Retornar', 'Alterar Senha'],
+                self.tela.botoes_tela(['Retornar', 'Alterar Senha'],
                                      'SISTEMA DE ARQUIVOS',
-                                     [[sg.Text('Nova senha: ', size=(15, 1)),
+                                      [[sg.Text('Nova senha: ', size=(15, 1)),
                                        sg.InputText('', key='senha1',
                                                     password_char='*')],
                                       [sg.Text('Repetir nova senha',
                                                size=(15, 1)),
                                        sg.InputText('', key='senha2',
                                                     password_char='*')]]
-                                     )
+                                      )
 
                 acesso = (self.tela.open())
                 primeira = acesso[1]['senha1']
@@ -60,14 +60,14 @@ class TelaConta:
         return primeira
 
     def tela_alterar_nome(self):
-        self.tela.botoestela(['Retornar', 'Alterar nome'],
+        self.tela.botoes_tela(['Retornar', 'Alterar nome'],
                              'SISTEMA DE ARQUIVOS',
-                             [[sg.Text('Novo Nome: ', size=(15, 1)),
+                              [[sg.Text('Novo Nome: ', size=(15, 1)),
                                sg.InputText('', key='nome1',)],
                               [sg.Text('Repetir novo nome: ',
                                        size=(15, 1)),
                                sg.InputText('', key='nome2')]]
-                             )
+                              )
 
         acesso = (self.tela.open())
         primeira = acesso[1]['nome1']
@@ -81,14 +81,14 @@ class TelaConta:
             else:
                 self.tela.show_message('ERRO DE ENTRADA!',
                                        'Nomes incoerentes!')
-                self.tela.botoestela(['Retornar', 'Alterar nome'],
+                self.tela.botoes_tela(['Retornar', 'Alterar nome'],
                                      'SISTEMA DE ARQUIVOS',
-                                     [[sg.Text('Novo nome: ', size=(15, 1)),
+                                      [[sg.Text('Novo nome: ', size=(15, 1)),
                                        sg.InputText('', key='nome1')],
                                       [sg.Text('Repetir novo nome: ',
                                                size=(15, 1)),
                                        sg.InputText('', key='nome2')]]
-                                     )
+                                      )
 
                 acesso = (self.tela.open())
                 primeira = acesso[1]['nome1']
@@ -99,14 +99,14 @@ class TelaConta:
         return primeira
 
     def tela_alterar_email(self):
-        self.tela.botoestela(['Retornar', 'Alterar email'],
+        self.tela.botoes_tela(['Retornar', 'Alterar email'],
                              'SISTEMA DE ARQUIVOS',
-                             [[sg.Text('Novo email: ', size=(15, 1)),
+                              [[sg.Text('Novo email: ', size=(15, 1)),
                                sg.InputText('', key='email1')],
                               [sg.Text('Repetir novo email: ',
                                        size=(15, 1)),
                                sg.InputText('', key='email2')]]
-                             )
+                              )
 
         acesso = (self.tela.open())
         primeira = acesso[1]['email1']
@@ -120,14 +120,14 @@ class TelaConta:
             else:
                 self.tela.show_message('ERRO DE ENTRADA!',
                                        'Emails incoerentes')
-                self.tela.botoestela(['Retornar', 'Alterar email'],
+                self.tela.botoes_tela(['Retornar', 'Alterar email'],
                                      'SISTEMA DE ARQUIVOS',
-                                     [[sg.Text('Novo email: ', size=(15, 1)),
+                                      [[sg.Text('Novo email: ', size=(15, 1)),
                                        sg.InputText('', key='email1')],
                                       [sg.Text('Repetir novo email: ',
                                                size=(15, 1)),
                                        sg.InputText('', key='email2')]]
-                                     )
+                                      )
 
                 acesso = (self.tela.open())
                 primeira = acesso[1]['email1']
@@ -139,14 +139,14 @@ class TelaConta:
 
     def tela_login(self, opt=None):
         if opt == 1:
-            self.tela.botoestela(['Retornar', 'Logar'],
+            self.tela.botoes_tela(['Retornar', 'Logar'],
                                  'SISTEMA DE ARQUIVOS',
-                                 [[sg.Text('CPF', size=(15, 1)),
+                                  [[sg.Text('CPF', size=(15, 1)),
                                    sg.InputText('', key='CPF')],
                                   [sg.Text('Senha', size=(15, 1)),
                                    sg.InputText('', key='Senha',
                                                 password_char='*')]]
-                                 )
+                                  )
 
             acesso = (self.tela.open())
             cpf = acesso[1]['CPF']
@@ -162,14 +162,14 @@ class TelaConta:
                     # print('Digite um CPF válido')
                     self.tela.show_message('ERRO DE ENTRADA!',
                                            'Digite um CPF válido')
-                    self.tela.botoestela(['Retornar', 'Logar'],
+                    self.tela.botoes_tela(['Retornar', 'Logar'],
                                          'SISTEMA DE ARQUIVOS',
-                                         [[sg.Text('CPF', size=(15, 1)),
+                                          [[sg.Text('CPF', size=(15, 1)),
                                            sg.InputText('', key='CPF')],
                                           [sg.Text('Senha', size=(15, 1)),
                                            sg.InputText('', key='Senha',
                                                         password_char='*')]]
-                                         )
+                                          )
                     acesso = (self.tela.open())
                     cpf = acesso[1]['CPF']
                     senha = acesso[1]['Senha']
@@ -182,9 +182,9 @@ class TelaConta:
 
     def tela_cadastro(self, cpfs):
         while True:
-            self.tela.botoestela(['Retornar', 'Cadastrar!'],
+            self.tela.botoes_tela(['Retornar', 'Cadastrar!'],
                                  'ERRO DE ENTRADA!',
-                                 [[sg.Text('Nome', size=(15, 1)),
+                                  [[sg.Text('Nome', size=(15, 1)),
                                    sg.InputText('', key='Nome')],
                                   [sg.Text('CPF', size=(15, 1)),
                                    sg.InputText('', key='CPF')],
@@ -198,7 +198,7 @@ class TelaConta:
                                   [sg.Text('Confirmar Senha', size=(15, 1)),
                                    sg.InputText('', key='Senha2',
                                                 password_char='*')]]
-                                 )
+                                  )
             acesso = (self.tela.open())
             nome = acesso[1]['Nome']
             cpf = acesso[1]['CPF']
@@ -240,21 +240,21 @@ class TelaConta:
                 return nome, cpf, empresa, email, senha1
 
     def tela_admin_usuario(self):
-        self.tela.botoestela(['Retornar', 'Criar usuario',
+        self.tela.botoes_tela(['Retornar', 'Criar usuario',
                               'Criar Administrador'],
                              'SISTEMA DE ARQUIVOS',
-                             [[sg.Text('Selecione a opcao o tipo de conta que'
+                              [[sg.Text('Selecione a opcao o tipo de conta que'
                                        'deseja criar!')]]
-                             )
+                              )
         opcao = str(self.tela.open()[0])
         self.tela.close()
         if opcao == '2':
             while True:
-                self.tela.botoestela(['Voltar', 'Desbloquear'],
+                self.tela.botoes_tela(['Voltar', 'Desbloquear'],
                                      'SISTEMA DE ARQUIVOS',
-                                     [[sg.Text('Código: ', size=(15, 1)),
+                                      [[sg.Text('Código: ', size=(15, 1)),
                                       sg.InputText('', key='Codigo')]]
-                                     )
+                                      )
                 acesso = (self.tela.open())
                 codigo = acesso[1]['Codigo']
                 self.tela.close()
@@ -267,15 +267,15 @@ class TelaConta:
         return opcao
 
     def tela_ver_dados(self, nome, cpf, email, empresa):
-        self.tela.botoestela(['NAO', 'SIM'],
+        self.tela.botoes_tela(['NAO', 'SIM'],
                              'SISTEMA DE ARQUIVOS',
-                             [[sg.Text(f'Nome: {nome}')],
+                              [[sg.Text(f'Nome: {nome}')],
                               [sg.Text(f'CPF: {cpf}')],
                               [sg.Text(f'Email: {email}')],
                               [sg.Text(f'Empresa: {empresa}')],
                               [sg.Text('DESEJA ALTERAR ALGUM DADO DA CONTA?')]
                               ]
-                             )
+                              )
         op = str(self.tela.open()[0])
         self.tela.close()
         return op
