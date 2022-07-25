@@ -4,6 +4,7 @@ from model.servidor import Servidor
 from view.tela_diretorio import *
 from model.conta import Conta
 from dao.diretorio_dao import DiretorioDao
+from controller.ctrl_logs import CtrlLog
 
 
 class CtrlDiretorio:
@@ -52,7 +53,7 @@ class CtrlDiretorio:
                     if path != "0":
                         validacao, permanencia,nome_arquivo = diretorio.adicionar_arquivo(path, usuario)
                         self.tela_diretorio.tela_mensagem(validacao)
-                        usuario.log.incluir_log(
+                        CtrlLog().incluir_log(
                             f'Arquivo {nome_arquivo} Adicionado', usuario)
                         self.__diretorio_dao.update()
                     else:
@@ -62,7 +63,7 @@ class CtrlDiretorio:
                 arquivos = self.mostrar_arquivos(diretorio)
                 excluido, nome_excluido = self.tela_diretorio.tela_excluir_arquivo(arquivos)
                 diretorio.excluir_arquivo(excluido)
-                usuario.log.incluir_log(
+                CtrlLog().incluir_log(
                     f'Arquivo {nome_excluido} Removido', usuario)
                 self.__diretorio_dao.update()
             elif opcao_diretorio == 4:

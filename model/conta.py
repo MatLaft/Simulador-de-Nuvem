@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from controller.ctrl_logs import Log
+from controller.ctrl_logs import CtrlLog
 
 
 class Conta(ABC):
@@ -11,7 +11,6 @@ class Conta(ABC):
         self.__senha = senha
         self.__diretorio = diretorio
         self.__empresa = empresa
-        self.__log = Log()
 
     @property
     def nome(self):

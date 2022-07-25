@@ -47,7 +47,7 @@ class TelaSistema:
         return opcao
 
     def print_logs(self, lista):
-        layout = [[sg.Text('Log do sistema', size=(30, 1),
+        layout = [[sg.Text('CtrlLog do sistema', size=(30, 1),
                            font='Lucida', justification='left')],
                   [sg.Listbox(values=lista,
                               select_mode='single', key='fac',

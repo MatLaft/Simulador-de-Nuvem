@@ -2,7 +2,7 @@ from controller.ctrl_conta import *
 from controller.ctrl_diretorio import *
 from controller.ctrl_servidor import *
 from view.tela_sistema import *
-from controller.ctrl_logs import Log
+from controller.ctrl_logs import CtrlLog
 
 
 class Sistema:
@@ -12,15 +12,15 @@ class Sistema:
         self.__controlador_diretorio = CtrlDiretorio()
         self.__usuario_ativo = None
         self.__tela_sistema = TelaSistema()
-        self.__log = Log()
+        self.__controlador_logs = CtrlLog()
 
     @property
     def usuario_ativo(self):
         return self.__usuario_ativo
 
     @property
-    def log(self):
-        return self.__log
+    def controlador_logs(self):
+        return self.__controlador_logs
 
     def logar(self):
         self.__usuario_ativo = self.__controlador_conta.logar()
@@ -38,23 +38,23 @@ class Sistema:
                 if novo_usuario is None:
                     pass
                 elif isinstance(novo_usuario, Usuario):
-                    self.log.incluir_log(f'Usuario Cadastrado {novo_usuario.cpf}')
+                    CtrlLog().incluir_log(f'Usuario Cadastrado {novo_usuario.cpf}')
                     novo_servidor = self.__controlador_servidor.adicionar_servidor(
                         novo_usuario.empresa)
-                    self.log.incluir_log(
+                    CtrlLog().incluir_log(
                         f'Servidor {novo_usuario.empresa} criado ')
                     novo_diretorio = self.__controlador_diretorio.adicionar_diretorio(
                         novo_servidor, novo_usuario)
                     novo_servidor.diretorios.append(novo_diretorio)
-                    self.log.incluir_log(
+                    CtrlLog().incluir_log(
                         f'Diretório {novo_usuario.cpf} adicionado')
                 elif isinstance(novo_usuario, Admin):
-                    self.log.incluir_log(f'Administrador Cadastrado {novo_usuario.cpf}')
+                    CtrlLog().incluir_log(f'Administrador Cadastrado {novo_usuario.cpf}')
                     novo_servidor = self.__controlador_servidor.adicionar_servidor(novo_usuario.empresa)
-                    self.log.incluir_log(f'Servidor {novo_usuario.empresa} criado ')
+                    CtrlLog().incluir_log(f'Servidor {novo_usuario.empresa} criado ')
                     novo_diretorio = self.__controlador_diretorio.adicionar_diretorio(novo_servidor, novo_usuario)
                     novo_servidor.diretorios.append(novo_diretorio)
-                    self.log.incluir_log(f'Diretório {novo_usuario.cpf} adicionado')
+                    CtrlLog().incluir_log(f'Diretório {novo_usuario.cpf} adicionado')
             elif opcao == '':
                 return
 
@@ -64,7 +64,7 @@ class Sistema:
             if isinstance(self.__usuario_ativo, Usuario):
                 opcao = (self.__tela_sistema.tela_menu())
                 if opcao == '0':
-                    self.usuario_ativo.log.incluir_log('Saiu do sistema', self.usuario_ativo)
+                    CtrlLog().incluir_log('Saiu do sistema', self.usuario_ativo)
                     self.__usuario_ativo = None
                     self.menu_inical()
                 elif opcao == '1':
@@ -74,8 +74,8 @@ class Sistema:
             else:
                 opcao = (self.__tela_sistema.tela_menu_admin())
                 if opcao == '0':
-                    self.usuario_ativo.log.incluir_log('Saiu do sistema',
-                                                       self.usuario_ativo)
+                    CtrlLog().incluir_log('Saiu do sistema',
+                                                                    self.usuario_ativo)
                     self.__usuario_ativo = None
                     self.menu_inical()
                 elif opcao == '1':
@@ -84,5 +84,5 @@ class Sistema:
                 elif opcao == '2':
                     self.__controlador_conta.ver_dados(self.__usuario_ativo)
                 elif opcao == '3':
-                    historico = list(self.log.log)
+                    historico = list(self.controlador_logs.log)[:]
                     self.__tela_sistema.print_logs(historico)

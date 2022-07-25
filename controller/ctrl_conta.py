@@ -2,6 +2,7 @@ from view.tela_conta import *
 from model.admin import *
 from controller.ctrl_diretorio import *
 from dao.contaDAO import ContaDAO
+from controller.ctrl_logs import CtrlLog
 
 
 class CtrlConta:
@@ -52,21 +53,21 @@ class CtrlConta:
             if novo_nome is None or novo_nome == '0':
                 return
             conta_selecionada.nome = novo_nome
-            conta_selecionada.log.incluir_log('Nome alterado', conta)
+            CtrlLog().incluir_log('Nome alterado', conta)
             self.__contas.update()
         elif opcao == 2:
             novo_email = self.__tela_conta.tela_alterar_email()
             if novo_email is None or novo_email == '0':
                 return
             conta_selecionada.email = novo_email
-            conta_selecionada.log.incluir_log('Email alterado',conta)
+            CtrlLog().incluir_log('Email alterado', conta)
             self.__contas.update()
         elif opcao == 3:
             novo_senha = self.__tela_conta.tela_alterar_senha()
             if novo_senha is None or novo_senha == '0':
                 return
             conta_selecionada.senha = novo_senha
-            conta_selecionada.log.incluir_log('Senha alterada',conta)
+            CtrlLog().incluir_log('Senha alterada', conta)
             self.__contas.update()
         elif opcao == 0:
             return
@@ -78,7 +79,7 @@ class CtrlConta:
                 return None
             for i in self.contas.values():
                 if i.cpf == cpf and i.senha == senha:
-                    i.log.incluir_log('Entrou no sistema', i)
+                    CtrlLog().incluir_log('Entrou no sistema', i)
                     return i
             else:
                 self.__tela_conta.tela_login()
