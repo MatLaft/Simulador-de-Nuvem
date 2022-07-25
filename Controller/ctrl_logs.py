@@ -2,16 +2,16 @@ from datetime import datetime
 from dao.logDAO import LogDAO
 
 
-class Log:
+class CtrlLog:
     __isinstance = None
 
     def __init__(self):
         self.__log = LogDAO()
 
     def __new__(cls):
-        if Log.__isinstance is None:
-            Log.__isinstance = object.__new__(cls)
-        return Log.__isinstance
+        if CtrlLog.__isinstance is None:
+            CtrlLog.__isinstance = object.__new__(cls)
+        return CtrlLog.__isinstance
 
     @property
     def log(self):
