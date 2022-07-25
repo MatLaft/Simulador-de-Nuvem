@@ -64,9 +64,7 @@ class Sistema:
             if isinstance(self.__usuario_ativo, Usuario):
                 opcao = (self.__tela_sistema.tela_menu())
                 if opcao == '0':
-                    self.usuario_ativo.log.incluir_log('Saiu do sistema')
-                    for i in self.usuario_ativo.log.log:
-                        self.log.incluir_log(f'{i}', self.__usuario_ativo, 'Sistema')
+                    self.usuario_ativo.log.incluir_log('Saiu do sistema', self.usuario_ativo)
                     self.__usuario_ativo = None
                     self.menu_inical()
                 elif opcao == '1':
@@ -76,10 +74,7 @@ class Sistema:
             else:
                 opcao = self.__tela_sistema.tela_menu_admin()
                 if opcao == '0':
-                    self.usuario_ativo.log.incluir_log('Saiu do sistema')
-                    for i in self.usuario_ativo.log.log:
-                        if i not in self.log.log:
-                            self.log.incluir_log(f'{i}', self.usuario_ativo, 'Sistema')
+                    self.usuario_ativo.log.incluir_log('Saiu do sistema', self.usuario_ativo)
                     self.__usuario_ativo = None
                     self.menu_inical()
                 elif opcao == '1':
@@ -87,7 +82,5 @@ class Sistema:
                 elif opcao == '2':
                     self.__controlador_conta.ver_dados(self.__usuario_ativo)
                 elif opcao == '3':
-                    logs = self.log.log
-                    for i in self.usuario_ativo.log.log:
-                        self.log.incluir_log(f'{i}', self.__usuario_ativo, 'Sistema')
-                    self.log.tela_log.print_logs(logs)
+                    self.log.tela_log.print_logs(self.log.log)
+

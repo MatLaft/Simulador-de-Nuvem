@@ -92,10 +92,10 @@ class TelaDiretorio:
         if event == "Excluir":
             self.close()
             if len(value['fac']) != 0:
-                return int(value['fac'][0][0]) - 1
+                return int(value['fac'][0][0]) - 1, value['fac'][0]
         if event == "Voltar":
             self.close()
-            return None
+            return None, None
 
     def tela_cota(self, cota: int):
         self.mostra_mensagem(f"\nA cota restante é: {cota:.2f} KB")

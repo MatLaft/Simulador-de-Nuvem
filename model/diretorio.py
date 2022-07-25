@@ -63,9 +63,8 @@ class Diretorio:
                     novo_arquivo = Arquivo(nome_arquivo, tamanho, data, path_colar)
                     self.__arquivos.append(novo_arquivo)
                     self.__cota -= tamanho
-                    self.usuario.log.incluir_log(f'Arquivo {nome_arquivo} Adicionado')
                     copia = 1
-                    return 'Arquivo adicionado ao diretório!', 1
+                    return 'Arquivo adicionado ao diretório!', 1, nome_arquivo
         except FileNotFoundError:
             return 'Verifique o caminho do arquivo, arquivo não encontrado!', 1
         except PermissionError:
@@ -78,4 +77,4 @@ class Diretorio:
             excluido = self.__arquivos.pop(arquivo)
             os.remove(excluido.path)
             self.__cota += excluido.tamanho
-            self.usuario.log.incluir_log(f'Arquivo {excluido.nome} Removido')
+

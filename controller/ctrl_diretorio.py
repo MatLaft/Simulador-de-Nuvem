@@ -50,16 +50,20 @@ class CtrlDiretorio:
                     diretorio = self.__diretorio_dao.get(usuario.cpf)
                     path = (self.tela_diretorio.tela_enviar_arquivo())
                     if path != "0":
-                        validacao, permanencia = diretorio.adicionar_arquivo(path, usuario)
+                        validacao, permanencia,nome_arquivo = diretorio.adicionar_arquivo(path, usuario)
                         self.tela_diretorio.tela_mensagem(validacao)
+                        usuario.log.incluir_log(
+                            f'Arquivo {nome_arquivo} Adicionado', usuario)
                         self.__diretorio_dao.update()
                     else:
                         permanencia = 0
             elif opcao_diretorio == 3:
                 diretorio = self.__diretorio_dao.get(usuario.cpf)
                 arquivos = self.mostrar_arquivos(diretorio)
-                excluido = self.tela_diretorio.tela_excluir_arquivo(arquivos)
+                excluido, nome_excluido = self.tela_diretorio.tela_excluir_arquivo(arquivos)
                 diretorio.excluir_arquivo(excluido)
+                usuario.log.incluir_log(
+                    f'Arquivo {nome_excluido} Removido', usuario)
                 self.__diretorio_dao.update()
             elif opcao_diretorio == 4:
                 diretorio = self.__diretorio_dao.get(usuario.cpf)

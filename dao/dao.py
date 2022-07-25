@@ -44,4 +44,3 @@ class DAO(ABC):
     @property
     def cache(self):
         return self.__cache
-
