@@ -4,7 +4,11 @@ from view.tela_geral import Tela
 
 class TelaLog:
     def __init__(self):
-        self.tela = Tela()
+        self.__tela = Tela()
+
+    @property
+    def tela(self):
+        return self.__tela
 
     def print_logs(self, lista_historico: list):
         column1 = [

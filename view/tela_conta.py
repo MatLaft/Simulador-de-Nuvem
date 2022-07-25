@@ -5,7 +5,11 @@ from Erros.cpf_duplicado_exception import CPFDuplicadoException
 
 class TelaConta:
     def __init__(self):
-        self.tela = Tela()
+        self.__tela = Tela()
+
+    @property
+    def tela(self):
+        return self.__tela
 
     def tela_alterar_conta(self):
         self.tela.botoes_tela(['Retornar', 'Nome', 'Email', 'Senha'],
