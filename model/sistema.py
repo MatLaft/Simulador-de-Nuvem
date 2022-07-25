@@ -85,4 +85,4 @@ class Sistema:
                     self.__controlador_conta.ver_dados(self.__usuario_ativo)
                 elif opcao == '3':
                     historico = list(self.controlador_logs.log)[:]
-                    self.__tela_sistema.print_logs(historico)
+                    CtrlLog().tela.print_logs(historico)

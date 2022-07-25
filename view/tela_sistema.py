@@ -45,19 +45,3 @@ class TelaSistema:
         opcao = str(self.tela.open()[0])
         self.tela.close()
         return opcao
-
-    def print_logs(self, lista):
-        layout = [[sg.Text('CtrlLog do sistema', size=(30, 1),
-                           font='Lucida', justification='left')],
-                  [sg.Listbox(values=lista,
-                              select_mode='single', key='fac',
-                              size=(100, 8))],
-                  [sg.Button('Voltar', font=('Times New Roman', 12))]]
-
-        self.__window = sg.Window('Meus Arquivos').Layout(layout)
-        event, value = self.__window.Read()
-        if event == "Voltar":
-            self.__window.close()
-
-    def close(self):
-        self.__window.Close()
