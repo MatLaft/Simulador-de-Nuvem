@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+from Erros.excluir_arquivo_exception import ExcluirArquivoException
 
 
 class TelaDiretorio:
@@ -68,7 +69,10 @@ class TelaDiretorio:
             return str(0)
 
     def tela_excluir_arquivo(self, lista_arquivos: []):
-        if len(lista_arquivos) == 0:
+        try:
+            if len(lista_arquivos) == 0:
+                raise ExcluirArquivoException
+        except ExcluirArquivoException:
             layout = [
                 [sg.Text('Não há arquivos para excluir', size=(30, 1),
                          font='Lucida', justification='left')],
@@ -93,6 +97,8 @@ class TelaDiretorio:
             self.close()
             if len(value['fac']) != 0:
                 return int(value['fac'][0][0]) - 1, value['fac'][0]
+            else:
+                return None, None
         if event == "Voltar":
             self.close()
             return None, None
