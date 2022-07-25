@@ -45,27 +45,3 @@ class Tela:
 
     def show_message(self, titulo: str, mensagem: str):
         sg.Popup(titulo, mensagem)
-
-# oi = Tela()
-# oi.botoestela(['NAO','SIM'],'ALTERAR CONTA',[ [sg.Text('Nome', size=(15, 1)), sg.InputText('',key= 'Nome')]])
-# x = oi.open()[1]
-# print(x)
-# column1 = [
-#     [sg.Text(f'Scrollable{i}')] for i in range(10)
-# ]
-#
-# column2 = [
-#     [sg.Text(f'Static{i}')] for i in range(5)
-# ]
-#
-# layout = [
-#     [
-#         sg.Column(column1, scrollable=True,  vertical_scroll_only=True),
-#         sg.Column(column2)
-#     ]
-# ]
-#
-# window = sg.Window('Scrollable', layout)
-# event, values = window.read()
-# window.close()
-# sg.main_sdk_help()

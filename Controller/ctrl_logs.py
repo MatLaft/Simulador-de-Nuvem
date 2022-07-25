@@ -1,6 +1,6 @@
 from datetime import datetime
-from view.tela_logs import TelaLog
 from dao.logDAO import LogDAO
+from view.tela_geral import Tela
 
 
 class Log:
@@ -8,8 +8,6 @@ class Log:
 
     def __init__(self):
         self.__log = LogDAO()
-        self.__tela_log = TelaLog()
-        self.__log_rep = []
 
     def __new__(cls):
         if Log.__isinstance is None:
@@ -19,10 +17,6 @@ class Log:
     @property
     def log(self):
         return self.__log.cache.keys()
-
-    @property
-    def tela_log(self):
-        return self.__tela_log
 
     def incluir_log(self, string: str, usuario=None):
         data_hora = datetime.now().strftime('%d/%m/%Y %H:%M:%S  :  ')

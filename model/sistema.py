@@ -72,15 +72,17 @@ class Sistema:
                 elif opcao == '2':
                     self.__controlador_conta.ver_dados(self.__usuario_ativo)
             else:
-                opcao = self.__tela_sistema.tela_menu_admin()
+                opcao = (self.__tela_sistema.tela_menu_admin())
                 if opcao == '0':
-                    self.usuario_ativo.log.incluir_log('Saiu do sistema', self.usuario_ativo)
+                    self.usuario_ativo.log.incluir_log('Saiu do sistema',
+                                                       self.usuario_ativo)
                     self.__usuario_ativo = None
                     self.menu_inical()
                 elif opcao == '1':
-                    self.__controlador_diretorio.menu_diretorio(self.__usuario_ativo)
+                    self.__controlador_diretorio.menu_diretorio(
+                        self.__usuario_ativo)
                 elif opcao == '2':
                     self.__controlador_conta.ver_dados(self.__usuario_ativo)
                 elif opcao == '3':
-                    self.log.tela_log.print_logs(self.log.log)
-
+                    historico = list(self.log.log)
+                    self.__tela_sistema.teste(historico)
