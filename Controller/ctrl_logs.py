@@ -1,5 +1,6 @@
 from datetime import datetime
 from dao.logDAO import LogDAO
+from view.tela_logs import TelaLog
 
 
 class CtrlLog:
@@ -7,6 +8,7 @@ class CtrlLog:
 
     def __init__(self):
         self.__log = LogDAO()
+        self.tela = TelaLog()
 
     def __new__(cls):
         if CtrlLog.__isinstance is None:
