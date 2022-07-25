@@ -62,8 +62,14 @@ class TelaDiretorio:
         event, value = self.__window.Read()
         if event == "Enviar":
             arquivo_path = value["path"]
-            self.close()
-            return str(arquivo_path)
+            print(arquivo_path)
+            if len(arquivo_path) > 0:
+                self.close()
+                return str(arquivo_path)
+            else:
+                self.mostra_mensagem("Nenhum arquivo selecionado!")
+                self.close()
+                return str(0)
         if event == "Voltar":
             self.close()
             return str(0)

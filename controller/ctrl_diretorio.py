@@ -51,7 +51,7 @@ class CtrlDiretorio:
                     diretorio = self.__diretorio_dao.get(usuario.cpf)
                     path = (self.tela_diretorio.tela_enviar_arquivo())
                     if path != "0":
-                        validacao, permanencia,nome_arquivo = diretorio.adicionar_arquivo(path, usuario)
+                        validacao, permanencia, nome_arquivo = diretorio.adicionar_arquivo(path, usuario)
                         self.tela_diretorio.tela_mensagem(validacao)
                         CtrlLog().incluir_log(
                             f'Arquivo {nome_arquivo} Adicionado', usuario)
